@@ -1,8 +1,8 @@
-#' Wrap lapply()/*bind() into one function call
+#' Wrap do.call(*bind(), lapply()) into one function call
 #'
 #' @param f A function to apply to the collection.
 #' @param x A collection, such as a list, matrix, or dataframe.
-#' @param ... Arguments passed to \code{\link{do.call()}}.
+#' @param ... Arguments passed to \code{\link{do.call}}.
 #' @return Matrix or dataframe.
 #' @details After applying functions such as \code{\link{lapply}} or \code{\link{Map}} to a dataset, \code{\link{do.call}} is often a solution to combine the list elements to obtain the original a tabular format. 
 #' 
