@@ -1,7 +1,7 @@
 #' Apply common function over multiple objects independent of each other
 #'
 #' @param f A function to apply to the collection(s).
-#' @param ... Data objects. Typically matrices or data frames.
+#' @param l List of data objects.
 #' 
 #' @return List.
 #' 
