@@ -9,7 +9,7 @@ telecast(f, l)
 \arguments{
 \item{f}{A function to apply to the collection(s).}
 
-\item{...}{Data objects. Typically matrices or data frames.}
+\item{l}{List of data objects.}
 }
 \value{
 List.

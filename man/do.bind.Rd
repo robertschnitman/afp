@@ -2,7 +2,7 @@
 % Please edit documentation in R/do.bind.R
 \name{do.bind}
 \alias{do.bind}
-\title{Wrap lapply()/*bind() into one function call}
+\title{Wrap do.call(*bind(), lapply()) into one function call}
 \usage{
 do.bind(f, x, rc = 1, ...)
 }
@@ -11,13 +11,13 @@ do.bind(f, x, rc = 1, ...)
 
 \item{x}{A collection, such as a list, matrix, or dataframe.}
 
-\item{...}{Arguments passed to \code{\link{do.call()}}.}
+\item{...}{Arguments passed to \code{\link{do.call}}.}
 }
 \value{
 Matrix or dataframe.
 }
 \description{
-Wrap lapply()/*bind() into one function call
+Wrap do.call(*bind(), lapply()) into one function call
 }
 \details{
 After applying functions such as \code{\link{lapply}} or \code{\link{Map}} to a dataset, \code{\link{do.call}} is often a solution to combine the list elements to obtain the original a tabular format. 
