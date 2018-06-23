@@ -1,2 +1,2 @@
-# afp
-Applied Functional Programming - to simplify iterative processes
+# UNDER CONSTRUCTION
+Applied Functional Programming - Tools to simplify iterative processes
