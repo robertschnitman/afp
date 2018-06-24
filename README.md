@@ -126,7 +126,7 @@ streamline the intended procedure in R.
     ## [2,] 0.0001022035 0.0002490183 0.0003310752
     ## [3,] 0.0001560306 0.0002837380 0.0003456270
 
-### EXAMPLE - `mapreduce()` \#2: Split a database and then sum subset-dependent ratios.
+### EXAMPLE - `mapreduce()` \#2: Split a dataset and then sum subset-dependent ratios.
 
     split2  <- split(mtcars, mtcars$gear)
     seqrng  <- function(x) {seq(min(x), mean(x), mean(x) - min(x))}
