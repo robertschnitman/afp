@@ -75,7 +75,7 @@ to `do.call()`.
 To note, the naming of this function is to be consistent with the
 previously mentioned function.
 
-### EXAMPLE - do.bind() \#1: Store subset-contingent lm() coefficients in a matrix.
+### EXAMPLE - `do.bind()` \#1: Store subset-contingent lm() coefficients in a matrix.
 
     split1  <- split(mtcars, mtcars$gear)
     adhoc1  <- function(s) {coef(lm(mpg ~ disp + wt + am, s))}
@@ -87,7 +87,7 @@ previously mentioned function.
     ## 4    46.68250 -0.097327135 -3.171284 -2.817164
     ## 5    41.77904 -0.006730729 -7.230952        NA
 
-### EXAMPLE - do.bind() \#2: Compute the median ozone-temperature ratio for each given month.
+### EXAMPLE - `do.bind()` \#2: Compute the median ozone-temperature ratio for each given month.
 
     airquality2 <- na.omit(airquality) # NA values exist in airquality.
     split2      <- split(airquality2, airquality2$Month)
