@@ -25,7 +25,7 @@
 #' output2 # Compare: lapply(l, function(x) mapply(red.div, x))
 #' 
 #' @seealso \url{https://github.com/robertschnitman/afp}, \code{\link{mapply}}, \code{\link{lapply}}
-#' \code{broadcast} from Julia: https://docs.julialang.org/en/v0.6.1/manual/arrays/#Broadcasting-1
+#' \code{broadcast} from Julia: \url{https://docs.julialang.org/en/v0.6.1/manual/arrays/#Broadcasting-1}
 
 telecast <- function(f, l) {
   
