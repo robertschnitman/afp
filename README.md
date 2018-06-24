@@ -1,4 +1,4 @@
-***Robert Schnitman***
+***Robert Schnitman***  
 ***2018-06-23***  
 ***Recommended Citation:  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Schnitman, Robert (2018). afp v0.0.0.1. <https://github.com/robertschnitman/afp>***
