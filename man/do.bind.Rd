@@ -22,7 +22,7 @@ Wrap do.call(*bind(), lapply()) into one function call
 \details{
 After applying functions such as \code{\link{lapply}} or \code{\link{Map}} to a dataset, \code{\link{do.call}} is often a solution to combine the list elements to obtain the original a tabular format. 
 
-To simplify this process, \code{\link{lapply}} and\code{\link{do.call}} are wrapped into this function, \code{do.bind}: it calls a function on a dataset and binds the elements into a matrix or dataframe (depending on the original collection type).
+To simplify this process, \code{\link{lapply}} and\code{\link{do.call}} are wrapped into this function, \code{do.bind}: it calls a function on a dataset and binds the elements into a matrix or dataframe (depending on the original collection type). One may achieve similar results with purrr::map_dfr/map_dfc.
 
 The type of bind is defined in a binary fashion (1 for row-wise, 2 for column-wise).
 }
