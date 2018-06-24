@@ -20,7 +20,7 @@ Apply common function over multiple objects independent of each other
 \details{
 Inspired by \code{broadcast} from Julia. Essentially, \code{telecast} wraps \code{\link{mapply}} within \code{\link{lapply}}.
 
-Base R functions such as \code{\link{Map}}/\code{\link{mapply}} apply functions pairwise when given multiple data objects. \code{telecast} fills the need to apply a common function against data objects exclusive to each other. 
+\code{\link{Map}}/\code{\link{mapply}} executes functions pairwise when given multiple data objects. \code{telecast} fills the need to apply a common function against data objects exclusive to each other. 
 
 Useful for storing disparate information into a single list.
 }
