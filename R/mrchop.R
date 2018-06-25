@@ -10,6 +10,8 @@
 #' 
 #' @details \code{\link{mapreduce}} with the option to apply a function over the columns or rows. Effectively calls \code{\link{apply}} and \code{\link{mapreduce}}.
 #' 
+#' The nameof the function is a reference to Julia's \code{mapreduce} and \code{mapslices} functions.
+#' 
 #' @examples
 #' # 1. Apply a function row-wise and consecutively add them.
 #' output1 <- mrchop(function(x) x/2, `+`, mtcars, 1)
@@ -21,6 +23,7 @@
 #' 
 #' @seealso \url{https://github.com/robertschnitman/afp}, \code{\link{Map}}, \code{\link{Reduce}}, \code{\link{mapreduce}}, \code{\link{apply}}
 #' \code{mapreduce} from Julia:\url{https://docs.julialang.org/en/v0.6.1/stdlib/collections/#Base.mapreduce-NTuple{4,Any}}
+#' \code{mapslices} from Julia:\url{https://docs.julialang.org/en/v0.6.2/stdlib/arrays/#Base.mapslices}
 
 mrchop <- function(f, o, x, m, ...) {
   
