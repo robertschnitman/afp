@@ -37,11 +37,11 @@ do.bind <- function(f, x, m = 1, ...) {
   l <- lapply(x, f)
   
   # 3. Combine list back into a tabular format based on whether rc == 1 or 2.
-  if (rc == 1) {
+  if (m == 1) {
     
     output <- do.call(rbind, l, ...)
     
-  } else if (rc == 2) {
+  } else if (m == 2) {
     
     output <- do.call(cbind, l, ...)
     
