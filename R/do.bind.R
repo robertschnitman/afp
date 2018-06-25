@@ -2,6 +2,7 @@
 #'
 #' @param f A function to apply to the collection.
 #' @param x A collection, such as a list, matrix, or dataframe.
+#' @param m Margin. 1 to call \code{\link{rbind}} (default) and 2 for \code{\link{cbind}}.
 #' @param ... Arguments passed to \code{\link{do.call}}.
 #' @return Matrix or dataframe.
 #' @details After applying functions such as \code{\link{lapply}} or \code{\link{Map}} to a dataset, \code{\link{do.call}} is often a solution to combine the list elements to obtain the original a tabular format. 
@@ -27,7 +28,7 @@
 #'
 #' @seealso \url{https://github.com/robertschnitman/afp}, \code{\link{lapply}}, \code{\link{do.call}}, \code{\link{rbind}}, \code{\link{cbind}}
 
-do.bind <- function(f, x, rc = 1, ...) { 
+do.bind <- function(f, x, m = 1, ...) { 
   
   # 1. Type-check function input.
   f <- match.fun(f)
