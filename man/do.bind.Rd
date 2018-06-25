@@ -4,12 +4,14 @@
 \alias{do.bind}
 \title{Wrap do.call(*bind(), lapply()) into one function call}
 \usage{
-do.bind(f, x, rc = 1, ...)
+do.bind(f, x, m = 1, ...)
 }
 \arguments{
 \item{f}{A function to apply to the collection.}
 
 \item{x}{A collection, such as a list, matrix, or dataframe.}
+
+\item{m}{Margin. 1 to call \code{\link{rbind}} (default) and 2 for \code{\link{cbind}}.}
 
 \item{...}{Arguments passed to \code{\link{do.call}}.}
 }
