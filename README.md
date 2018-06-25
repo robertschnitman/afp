@@ -67,8 +67,8 @@ must be done in different functions, whereas it can be defined within
 `do.bind()`.
 
 There are three required parameters in this function: `f`, `x`, and
-`rc`--respectively the function, collection (e.g. data frame), and
-rbind/cbind designation. If `rc = 1` (the default), the results are
+`m`--respectively the function, collection (e.g. data frame), and
+margin (rbind/cbind designation). If `m = 1` (the default), the results are
 combined row-wise; `2` for column-wise. A fourth parameter `...` passes
 to `do.call()`.
 
