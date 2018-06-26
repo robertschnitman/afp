@@ -179,7 +179,6 @@ function and list.
 ### EXAMPLE - `telecast()` \#2: Iteratively reduce each variable for all datasets in a list.
 
     # With the same list in the previous example...
-
     red.div <- function(y) Reduce(`/`, y)
     output2 <- telecast(red.div, l) 
     output2 # Compare: lapply(l, function(x) mapply(red.div, x))
