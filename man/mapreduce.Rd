@@ -36,7 +36,7 @@ output1 # matrix 3x3
 # 2. Use multiple arguments.
 matrixl <- list(A = matrix(c(1:9), 3, 3), B = matrix(10:18, 3, 3), C = matrix(19:27, 3, 3))
 output2 <- with(matrixl, mapreduce(function(i, j, k) i*j - k, `/`, A, list(B, C)))
-output2 <- matrix 3x3
+output2
 
 }
 \seealso{
