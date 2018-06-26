@@ -126,15 +126,16 @@ streamline the intended procedure in R.
     ## [2,] 0.0001022035 0.0002490183 0.0003310752
     ## [3,] 0.0001560306 0.0002837380 0.0003456270
 
-### EXAMPLE - `mapreduce()` \#2: Split a dataset and then sum subset-dependent ratios.
+### EXAMPLE - `mapreduce()` \#2: A case of multiple arguments.
 
-    split2  <- split(mtcars, mtcars$gear)
-    seqrng  <- function(x) {seq(min(x), mean(x), mean(x) - min(x))}
-    adhoc   <- function(x, y) {seqrng(x)/seqrng(y)}
-    output2 <- mapreduce(function(s) with(s, adhoc(mpg, disp)), `+`, split2)
-    output2 # == Reduce(`/`, Map(function(s) with(s, adhoc(mpg, disp)), split2)) # numeric, length 2
+    # Using the same list from the previous example...
+    output2 <- with(matrixl, mapreduce(function(i, j, k) i*j - k, `/`, A, list(B, C)))
+    output2
 
-    ## [1] 0.4946748 0.3543832
+    ##               [,1]          [,2]          [,3]
+    ## [1,] -1.387799e-10 -3.408547e-12 -3.442132e-13
+    ## [2,] -2.925642e-11 -1.456427e-12 -1.839155e-13
+    ## [3,] -9.059628e-12 -6.829299e-13 -1.031438e-13
 
 ## 4. `telecast()`
 ---------------
