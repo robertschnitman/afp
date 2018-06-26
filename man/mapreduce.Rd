@@ -4,7 +4,7 @@
 \alias{mapreduce}
 \title{Apply function over collection and then iteratively reduce it a la` mapreduce() from Julia}
 \usage{
-mapreduce(f, o, x, ...)
+mapreduce(f, o, x, y = NULL, ...)
 }
 \arguments{
 \item{f}{A function to apply to the collection.}
@@ -13,16 +13,15 @@ mapreduce(f, o, x, ...)
 
 \item{x}{A collection, such as a a list, matrix, or data frame.}
 
+\item{y}{A list of additional arguments from \code{f}. Passed to MoreArgs from \code{\link{Map}}.}
+
 \item{...}{Arguments passed to \code{\link{Reduce}}.}
-}
-\value{
-Vector. Can differ based on the given inputs. For example, if accumulate = TRUE (via \code{\link{Reduce}}), a vector of length > 1 is returned; otherwise, a 1-element result.
 }
 \description{
 Apply function over collection and then iteratively reduce it a la` mapreduce() from Julia
 }
 \details{
-A simplified \code{mapreduce} from Julia.
+A simplified \code{mapreduce} from Julia with a multivariate option.
 
 Base R has functionals that output a list by way of \code{\link{lapply()}} and \code{\link{Map}} (among others), while \code{\link{Reduce}} diminishes given elements in a consecutive manner until a single result remains. To reduce the output of a mapping, the mentioned functions are required. 
 
@@ -34,13 +33,10 @@ matrixl <- list(A = matrix(c(1:9), 3, 3), B = matrix(10:18, 3, 3), C = matrix(19
 output1 <- mapreduce(function(x) x^2 + 1, `/`, matrixl) 
 output1 # matrix 3x3
 
-# 2. Split a dataset, apply a ratio to each subset, and then sum said ratios.
-split2  <- split(mtcars, mtcars$gear)
-seqrng  <- function(x) {seq(min(x), mean(x), mean(x) - min(x))}
-adhoc   <- function(x, y) {seqrng(x)/seqrng(y)}
-output2 <- mapreduce(function(s) with(s, adhoc(mpg, disp)), `+`, split2)
-output2 # numeric, length 2
-
+# 2. Use multiple arguments.
+matrixl <- list(A = matrix(c(1:9), 3, 3), B = matrix(10:18, 3, 3), C = matrix(19:27, 3, 3))
+output2 <- with(matrixl, mapreduce(function(i, j, k) i*j - k, `/`, A, list(B, C)))
+output2 <- matrix 3x3
 
 }
 \seealso{
