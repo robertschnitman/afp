@@ -4,13 +4,15 @@
 #' @param o A binary operator. Typically arithmetic operators, but can be another (binary) function.
 #' @param x A matrix, or data frame.
 #' @param m Margin. 1 = row-wise; 2 = column wise. See \code{\link{apply}}.
-#' @param ... Arguments passed to \code{\link{Reduce}}.
+#' @param ... Arguments passed to \code{\link{mapreduce}}.
 #' 
 #' @return Vector. Can differ based on the given inputs. For example, if accumulate = TRUE (via \code{\link{Reduce}}), a vector of length > 1 is returned; otherwise, a 1-element result.
 #' 
-#' @details \code{\link{mapreduce}} with the option to apply a function over the columns or rows. Effectively calls \code{\link{apply}} and \code{\link{mapreduce}}.
+#' @details \code{\link{mapreduce}} with the option to apply a function over the columns or rows. Effectively calls \code{\link{apply}} and \code{\link{mapreduce}}; however, \code{mrchop} is not multivariate, similar to the former.
 #' 
-#' The nameof the function is a reference to Julia's \code{mapreduce} and \code{mapslices} functions.
+#' In turn, this function is \code{\link{apply}} with a reduction capability.
+#' 
+#' The name of the function is a reference to Julia's \code{mapreduce} and \code{mapslices} functions.
 #' 
 #' @examples
 #' # 1. Apply a function row-wise and consecutively add them.
@@ -31,10 +33,10 @@ mrchop <- function(f, o, x, m, ...) {
   f <- match.fun(f)
   o <- match.fun(o)
   
-  stopifnot(is.matrix(x) | is.data.frame(x))
+  stopifnot(is.matrix(x) | is.data.frame(x))                           # Intent is that x is 2D.
   
   # 2. Use apply() to set margins.
-  output <- apply(x, m, function(y) mapreduce(f, o, y, ...))
+  output <- apply(x, m, function(z) mapreduce(f, o, z, y = NULL, ...)) # mrchop() is not multivariate.
   
   # 3. Output should be a 2 dimensional dataset (matrix/data frame)
   output
