@@ -1,7 +1,7 @@
 Package: afp
 Type: Package
 Title: Applied Functional Programming
-Version: 0.0.0.01
+Version: 0.0.0.1
 Author: Robert Schnitman <robertschnitman@gmail.com>
 Maintainer: Robert Schnitman <robertschnitman@gmail.com>
 Description: Tools to simplify iterative processes in functional programming.
