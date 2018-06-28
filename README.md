@@ -6,12 +6,13 @@
 Outline
 -------
 
-1.  Installation
-2.  Introduction
-3.  `do.bind()`
-4.  `mapreduce()`
-5.  `telecast()`
-6.  Conclusion
+0.  Installation
+1.  Introduction
+2.  `do.bind()`
+3.  `mapreduce()`
+4.  `telecast()`
+5.  Conclusion
+6. References
 
 ## 0. Installation
 ---------------
@@ -208,5 +209,15 @@ The functions discussed and demonstrated will be improved on a
 continuous basis to (1) minimize repetitive iterative processing and (2)
 emphasize code efficiency and brevity. New functions to be added based
 on feasibility and future needs as appropriate.
+
+## 6. References
+-------------
+[Julia programming language](https://julialang.org/)  
+[Julia - `broadcast()`](https://docs.julialang.org/en/v0.6.1/manual/arrays/#Broadcasting-1)  
+[Julia - `mapreduce()`](https://docs.julialang.org/en/v0.6.1/stdlib/collections/#Base.mapreduce-NTuple%7B4,Any%7D)  
+[Tidyverse - `purrr`](https://purrr.tidyverse.org/)  
+
+While not mentioned in this document, Hadley Wickham's [Advanced R](http://adv-r.had.co.nz/Functionals.html)
+is a fabulous reference for functionals in R.
 
 *End of Document*
