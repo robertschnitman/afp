@@ -111,7 +111,7 @@ accomplish this operation [unlike `mapreduce()` in
 Julia](https://docs.julialang.org/en/v0.6.1/stdlib/collections/#Base.mapreduce-NTuple%7B4,Any%7D).
 
 The three required parameters are `f`, `o`, and `x` ("fox",
-collectively). A fourth parameter `...` passes to `Reduce()`.
+collectively)--function, (binary) operator, and collection (e.g. matrix). If `f` is multivariate, the fourth parameter `y` can take multiple arguments much like `MoreArgs` in `mapply()`. The final parameter `...` passes to `Reduce()`.
 
 In turn, `mapreduce()` in `afp` offers a simplified Julia-equivalent to
 streamline the intended procedure in R.
