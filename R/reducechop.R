@@ -27,7 +27,7 @@ reducechop <- function(o, x, m = 2, ...) {
   
   stopifnot(is.matrix(x) | is.data.frame(x)) # Intent is that x is 2D.
   
-  if (!any(k == 1:2)) {
+  if (!any(m == 1:2)) {
     
     stop('The margin must either be 1 (row-wise) or 2 (column-wise).')
     
