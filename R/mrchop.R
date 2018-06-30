@@ -2,7 +2,7 @@
 #'
 #' @param f A function to apply to the collection.
 #' @param o A binary operator. Typically arithmetic operators, but can be another (binary) function.
-#' @param x A matrix, or data frame.
+#' @param x A matrix or data frame.
 #' @param m Margin. 1 = row-wise; 2 = column wise. See \code{\link{apply}}.
 #' @param ... Arguments passed to \code{\link{mapreduce}}.
 #' 
