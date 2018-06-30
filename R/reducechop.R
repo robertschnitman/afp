@@ -36,7 +36,7 @@ reducechop <- function(o, x, m = 2, ...) {
   # 2. Use apply() to set margins.
   output <- apply(x, m, function(z) Reduce(o, z, ...)) # mrchop() is not multivariate.
   
-  # 3. Output should be a 2 dimensional dataset (matrix/data frame)
+  # 3. Output should be a vector.
   output
   
 }
