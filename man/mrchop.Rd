@@ -11,11 +11,11 @@ mrchop(f, o, x, m, ...)
 
 \item{o}{A binary operator. Typically arithmetic operators, but can be another (binary) function.}
 
-\item{x}{A matrix, or data frame.}
+\item{x}{A matrix or data frame.}
 
-\item{m}{Margin. 1 = row-wise; 2 = column wise. See \code{\link{apply}}.}
+\item{m}{Margin. 1 = row-wise; 2 = column-wise. See \code{\link{apply}}.}
 
-\item{...}{Arguments passed to \code{\link{Reduce}}.}
+\item{...}{Arguments passed to \code{\link{mapreduce}}.}
 }
 \value{
 Vector. Can differ based on the given inputs. For example, if accumulate = TRUE (via \code{\link{Reduce}}), a vector of length > 1 is returned; otherwise, a 1-element result.
@@ -24,9 +24,11 @@ Vector. Can differ based on the given inputs. For example, if accumulate = TRUE 
 Map function to a 2D dataset and reduce the results based on a given margin.
 }
 \details{
-\code{\link{mapreduce}} with the option to apply a function over the columns or rows. Effectively calls \code{\link{apply}} and \code{\link{mapreduce}}.
+\code{\link{mapreduce}} with the option to apply a function over the columns or rows. Effectively calls \code{\link{apply}} and \code{\link{mapreduce}}; however, \code{mrchop} is not multivariate, similar to the former.
 
-The nameof the function is a reference to Julia's \code{mapreduce} and \code{mapslices} functions.
+In turn, this function is \code{\link{apply}} with a reduction capability.
+
+The name of the function is a reference to Julia's \code{mapreduce} and \code{mapslices} functions.
 }
 \examples{
 # 1. Apply a function row-wise and consecutively add them.
