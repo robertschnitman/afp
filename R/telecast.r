@@ -1,4 +1,6 @@
 #' Apply common function over multiple objects independent of each other
+#' 
+#' @description Apply common function over multiple objects independent of each other.
 #'
 #' @param f A function to apply to the collection(s).
 #' @param l List of data objects.
@@ -24,7 +26,7 @@
 #' output2 <- telecast(red.div, l) 
 #' output2 # Compare: lapply(l, function(x) mapply(red.div, x))
 #' 
-#' @seealso \url{https://github.com/robertschnitman/afp}, \code{\link{mapply}}, \code{\link{lapply}}
+#' @seealso \url{https://github.com/robertschnitman/afp}, \code{\link{mapply}}, \code{\link{lapply}},  
 #' \code{broadcast} from Julia: \url{https://docs.julialang.org/en/v0.6.1/manual/arrays/#Broadcasting-1}
 
 telecast <- function(f, l) {

@@ -1,13 +1,13 @@
 #' Apply function over collection and then filter it with a predicate function
+#' 
+#' @description Apply function over collection and then filter it with a predicate function. Effectively, this function calls \code{mapply} and \code{Filter}.
 #'
 #' @param f A function to apply to the collection.
 #' @param p Predicate function to filter the data. See \code{\link{Filter}}.
 #' @param x A collection, such as a list, matrix, or data frame.
 #' @param ... Arguments passed to \code{\link{mapply}}.
 #' 
-#' @details Effectively, this function calls \code{mapply} and \code{Filter}.
-#' 
-#' When operating on lists, combining \code{mapfilter} with \code{\link{telecast}} is advised if the list elements are disparate.
+#' @details When operating on lists, combining \code{mapfilter} with \code{\link{telecast}} is advised if the list elements are disparate.
 #' 
 #' @examples
 #' # 1. Obtain the squared even elements from a vector.
@@ -24,7 +24,6 @@
 #' output2 # list of lists.
 #'
 #' @seealso \url{https://github.com/robertschnitman/afp}, \code{\link{Map}}, \code{\link{Filter}}, \code{\link{telecast}}
-
 
 mapfilter <- function(f, p, x, ...) {
   

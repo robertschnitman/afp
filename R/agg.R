@@ -1,4 +1,6 @@
 #' Tidy aggregate output
+#' 
+#' @description Maintain a tidy data frame when aggregating results.
 #'
 #' @param ... Parameters passed to \code{\link{aggregate}}.
 #' 

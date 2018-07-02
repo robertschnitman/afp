@@ -1,4 +1,6 @@
 #' Reduce a dataset by a margin and apply a function afterward
+#' 
+#' @description Reduce a dataset by a margin and apply a function afterward. Effectively, this function calls \code{\link{mapply}} and \code{\link{reducechop}}.
 #'
 #' @param o A binary operator. Typically arithmetic operators, but can be another (binary) function.
 #' @param m Margin. 1 = row-wise; 2 = column-wise (default). See \code{\link{apply}}.
@@ -6,15 +8,13 @@
 #' @param x A collection, such as a a list, matrix, or data frame. 
 #' @param ... Arguments passed to \code{\link{Reduce}}.
 #' 
-#' @details Inverse of \code{mapreduce}: reduce a dataset row-wise or column-wise, applying a function on the collection afterward.
-#' 
-#' Effectively, this function calles \code{\link{mapply}} and \code{\link{reducechop}}.
+#' @details Inverse of \code{mapreduce}: reduce a dataset row-wise or column-wise, applying a function on the collection afterward. 
 #' 
 #' @examples
 #' reducemap(`+`, 2, function(x) x^2, mtcars) # Add all values for each variable and then square the reduction.
 #' reducemap(`-`, 1, function(x) x^2, mtcars, right = TRUE) # Subtracts iteratively starting from the rightmost row
 #'
-#' @seealso \url{https://github.com/robertschnitman/afp}, \code{\link{mapply}}, \code{\link{Reduce}}, \code{\link{reducechop}}
+#' @seealso \url{https://github.com/robertschnitman/afp}, \code{\link{mapply}}, \code{\link{Reduce}}, \code{\link{reducechop}},  
 #' \code{mapreduce} from Julia:\url{https://docs.julialang.org/en/v0.6.1/stdlib/collections/#Base.mapreduce-NTuple{4,Any}}
 
 reducemap <- function(o, m = 2, f, x, ...) {

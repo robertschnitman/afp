@@ -1,4 +1,6 @@
-#' Reduce a 2D dataset by a given margin.
+#' Reduce a 2D dataset by a given margin
+#' 
+#' @description Reduce a tabular data column-wise or row-wise.
 #'
 #' @param o A binary operator. Typically arithmetic operators, but can be another (binary) function.
 #' @param x A matrix or data frame.
@@ -15,9 +17,9 @@
 #' reducechop(`+`, mtcars, 2) # Column-wise (default).
 #' reducechop(`/`, mtcars, 1) # Row-wise. Equivalent to Reduce(`/`, mtcars).  
 #' 
-#' @seealso \url{https://github.com/robertschnitman/afp}, \code{\link{Reduce}}, \code{\link{apply}}
-#' \code{mapreduce} from Julia:\url{https://docs.julialang.org/en/v0.6.1/stdlib/collections/#Base.mapreduce-NTuple{4,Any}}
-#' \code{mapslices} from Julia:\url{https://docs.julialang.org/en/v0.6.2/stdlib/arrays/#Base.mapslices}
+#' @seealso \url{https://github.com/robertschnitman/afp}, \code{\link{Reduce}}, \code{\link{apply}},
+#' \code{mapreduce} from Julia:\url{https://docs.julialang.org/en/v0.6.1/stdlib/collections/#Base.mapreduce-NTuple{4,Any}},  
+#' \code{mapslices} from Julia:\url{https://docs.julialang.org/en/v0.6.2/stdlib/arrays/#Base.mapslices},  
 #' Original \code{reducechop}: \url{https://github.com/robertschnitman/afpj/blob/master/src/reducechop.jl}
 
 reducechop <- function(o, x, m = 2, ...) {

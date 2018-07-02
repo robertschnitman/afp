@@ -1,4 +1,6 @@
 #' Apply function over collection and then iteratively reduce it a la` mapreduce() from Julia
+#' 
+#' @description Apply function over collection and then iteratively reduce it a la` mapreduce() from Julia.
 #'
 #' @param f A function to apply to the collection.
 #' @param o A binary operator. Typically arithmetic operators, but can be another (binary) function.
@@ -23,8 +25,7 @@
 #' output2 <- with(matrixl, mapreduce(function(i, j, k) i*j - k, `/`, A, list(B, C)))
 #' output2
 #'
-#' @seealso \url{https://github.com/robertschnitman/afp}, \code{\link{Map}}, \code{\link{Reduce}}
-#' \code{mapreduce} from Julia:\url{https://docs.julialang.org/en/v0.6.1/stdlib/collections/#Base.mapreduce-NTuple{4,Any}}
+#' @seealso \url{https://github.com/robertschnitman/afp}, \code{\link{Map}}, \code{\link{Reduce}}, \code{mapreduce} from Julia:\url{https://docs.julialang.org/en/v0.6.1/stdlib/collections/#Base.mapreduce-NTuple{4,Any}}
 
 mapreduce <- function(f, o, x, y = NULL, ...) {
   
