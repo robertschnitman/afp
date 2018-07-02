@@ -2,10 +2,12 @@
 #'
 #' @param f A function to apply to the collection.
 #' @param p Predicate function to filter the data. See \code{\link{Filter}}.
-#' @param x A collection, such as a a list, matrix, or data frame.
+#' @param x A collection, such as a list, matrix, or data frame.
 #' @param ... Arguments passed to \code{\link{mapply}}.
 #' 
-#' @details Effectively, this function calls \code{mapply(..., SIMPLIFY = FALSE)} and \code{Filter}.
+#' @details Effectively, this function calls \code{mapply} and \code{Filter}.
+#' 
+#' When operating on lists, combining \code{mapfilter} with \code{\link{telecast}} is advised if the list elements are disparate.
 #' 
 #' @examples
 #' # 1. Obtain the squared even elements from a vector.
@@ -14,7 +16,7 @@
 #' output1 <- mapfilter(function(x) x^2, is.even, A)
 #' output1
 #' 
-#' # 2. For each dataset, find the cubed odd elements.
+#' # 2. For each dataset and its set of variables, find the cubed odd elements.
 #' l       <- list(mc = mtcars, aq = airquality, lcs = LifeCycleSavings)
 #' is.odd  <- function(x) x %% 2 == 1
 #' mf.odd  <- function(x) mapfilter(function(y) y^3, is.odd, x)
@@ -33,7 +35,7 @@ mapfilter <- function(f, p, x, ...) {
   # 2. Map THEN filter.
   output <- Filter(p, mapply(f, x, ...))
   
-  # 3. Output can be a vector or list, depending on the SIMPLIFY input.
+  # 3. Output varies based on the passed functions and how SIMPLIFY in mapply() is set.
   output
   
 }
