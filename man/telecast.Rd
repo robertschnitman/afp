@@ -15,7 +15,7 @@ telecast(f, l)
 List.
 }
 \description{
-Apply common function over multiple objects independent of each other
+Apply common function over multiple objects independent of each other.
 }
 \details{
 Inspired by \code{broadcast} from Julia. Essentially, \code{telecast} wraps \code{\link{mapply}} within \code{\link{lapply}}.
@@ -39,6 +39,6 @@ output2 # Compare: lapply(l, function(x) mapply(red.div, x))
 
 }
 \seealso{
-\url{https://github.com/robertschnitman/afp}, \code{\link{mapply}}, \code{\link{lapply}}
+\url{https://github.com/robertschnitman/afp}, \code{\link{mapply}}, \code{\link{lapply}},  
 \code{broadcast} from Julia: \url{https://docs.julialang.org/en/v0.6.1/manual/arrays/#Broadcasting-1}
 }

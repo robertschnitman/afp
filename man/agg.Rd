@@ -13,7 +13,7 @@ agg(...)
 Data frame.
 }
 \description{
-Tidy aggregate output
+Maintain a tidy data frame when aggregating results.
 }
 \details{
 When calling multiple functions in a vector, \code{\link{aggregate}} nests the output into the dependent variable(s). To maintain a tidy data frame, \code{agg} replicates the procedure of \code{\link{aggregate}} and unnests the result.

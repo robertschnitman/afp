@@ -18,7 +18,7 @@ mapreduce(f, o, x, y = NULL, ...)
 \item{...}{Arguments passed to \code{\link{Reduce}}.}
 }
 \description{
-Apply function over collection and then iteratively reduce it a la` mapreduce() from Julia
+Apply function over collection and then iteratively reduce it a la` mapreduce() from Julia.
 }
 \details{
 A simplified \code{mapreduce} from Julia with a multivariate option.
@@ -40,6 +40,5 @@ output2
 
 }
 \seealso{
-\url{https://github.com/robertschnitman/afp}, \code{\link{Map}}, \code{\link{Reduce}}
-\code{mapreduce} from Julia:\url{https://docs.julialang.org/en/v0.6.1/stdlib/collections/#Base.mapreduce-NTuple{4,Any}}
+\url{https://github.com/robertschnitman/afp}, \code{\link{Map}}, \code{\link{Reduce}}, \code{mapreduce} from Julia:\url{https://docs.julialang.org/en/v0.6.1/stdlib/collections/#Base.mapreduce-NTuple{4,Any}}
 }

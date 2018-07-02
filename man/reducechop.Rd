@@ -2,7 +2,7 @@
 % Please edit documentation in R/reducechop.R
 \name{reducechop}
 \alias{reducechop}
-\title{Reduce a 2D dataset by a given margin.}
+\title{Reduce a 2D dataset by a given margin}
 \usage{
 reducechop(o, x, m = 2, ...)
 }
@@ -19,7 +19,7 @@ reducechop(o, x, m = 2, ...)
 Vector.
 }
 \description{
-Reduce a 2D dataset by a given margin.
+Reduce a tabular data column-wise or row-wise.
 }
 \details{
 Effectively, this function calls \code{\link{apply}} to determine whether \code{\link{Reduce}} is mapped over columns or rows. 
@@ -32,8 +32,8 @@ reducechop(`/`, mtcars, 1) # Row-wise. Equivalent to Reduce(`/`, mtcars).
 
 }
 \seealso{
-\url{https://github.com/robertschnitman/afp}, \code{\link{Reduce}}, \code{\link{apply}}
-\code{mapreduce} from Julia:\url{https://docs.julialang.org/en/v0.6.1/stdlib/collections/#Base.mapreduce-NTuple{4,Any}}
-\code{mapslices} from Julia:\url{https://docs.julialang.org/en/v0.6.2/stdlib/arrays/#Base.mapslices}
+\url{https://github.com/robertschnitman/afp}, \code{\link{Reduce}}, \code{\link{apply}},
+\code{mapreduce} from Julia:\url{https://docs.julialang.org/en/v0.6.1/stdlib/collections/#Base.mapreduce-NTuple{4,Any}},  
+\code{mapslices} from Julia:\url{https://docs.julialang.org/en/v0.6.2/stdlib/arrays/#Base.mapslices},  
 Original \code{reducechop}: \url{https://github.com/robertschnitman/afpj/blob/master/src/reducechop.jl}
 }

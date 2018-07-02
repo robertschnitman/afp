@@ -18,12 +18,10 @@ reducemap(o, m = 2, f, x, ...)
 \item{...}{Arguments passed to \code{\link{Reduce}}.}
 }
 \description{
-Reduce a dataset by a margin and apply a function afterward
+Reduce a dataset by a margin and apply a function afterward. Effectively, this function calls \code{\link{mapply}} and \code{\link{reducechop}}.
 }
 \details{
 Inverse of \code{mapreduce}: reduce a dataset row-wise or column-wise, applying a function on the collection afterward.
-
-Effectively, this function calles \code{\link{mapply}} and \code{\link{reducechop}}.
 }
 \examples{
 reducemap(`+`, 2, function(x) x^2, mtcars) # Add all values for each variable and then square the reduction.
@@ -31,6 +29,6 @@ reducemap(`-`, 1, function(x) x^2, mtcars, right = TRUE) # Subtracts iteratively
 
 }
 \seealso{
-\url{https://github.com/robertschnitman/afp}, \code{\link{mapply}}, \code{\link{Reduce}}, \code{\link{reducechop}}
+\url{https://github.com/robertschnitman/afp}, \code{\link{mapply}}, \code{\link{Reduce}}, \code{\link{reducechop}},  
 \code{mapreduce} from Julia:\url{https://docs.julialang.org/en/v0.6.1/stdlib/collections/#Base.mapreduce-NTuple{4,Any}}
 }

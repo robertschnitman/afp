@@ -16,11 +16,9 @@ mapfilter(f, p, x, ...)
 \item{...}{Arguments passed to \code{\link{mapply}}.}
 }
 \description{
-Apply function over collection and then filter it with a predicate function
+Apply function over collection and then filter it with a predicate function. Effectively, this function calls \code{mapply} and \code{Filter}.
 }
 \details{
-Effectively, this function calls \code{mapply} and \code{Filter}.
-
 When operating on lists, combining \code{mapfilter} with \code{\link{telecast}} is advised if the list elements are disparate.
 }
 \examples{

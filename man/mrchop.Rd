@@ -2,7 +2,7 @@
 % Please edit documentation in R/mrchop.R
 \name{mrchop}
 \alias{mrchop}
-\title{Map function to a 2D dataset and reduce the results based on a given margin.}
+\title{Map function to a 2D dataset and reduce the results based on a given margin}
 \usage{
 mrchop(f, o, x, m, ...)
 }
@@ -21,14 +21,14 @@ mrchop(f, o, x, m, ...)
 Vector. Can differ based on the given inputs. For example, if accumulate = TRUE (via \code{\link{Reduce}}), a vector of length > 1 is returned; otherwise, a 1-element result.
 }
 \description{
-Map function to a 2D dataset and reduce the results based on a given margin.
-}
-\details{
-\code{\link{mapreduce}} with the option to apply a function over the columns or rows. Effectively calls \code{\link{apply}} and \code{\link{mapreduce}}; however, \code{mrchop} is not multivariate, similar to the former.
-
-In turn, this function is \code{\link{apply}} with a reduction capability.
+Map function to a 2D dataset and reduce the results based on a given margin. 
 
 The name of the function is a reference to Julia's \code{mapreduce} and \code{mapslices} functions.
+}
+\details{
+\code{\link{mapreduce}} with the option to apply a function over the columns or rows. Effectively, it calls \code{\link{apply}} and \code{\link{mapreduce}}; however, \code{mrchop} is not multivariate, similar to the former.
+
+In turn, this function is \code{\link{apply}} with a reduction capability.
 }
 \examples{
 # 1. Apply a function row-wise and consecutively add them.

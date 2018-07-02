@@ -2,7 +2,7 @@
 % Please edit documentation in R/do.bind.R
 \name{do.bind}
 \alias{do.bind}
-\title{Wrap do.call(*bind(), lapply()) into one function call}
+\title{List-apply a function and then bind the results}
 \usage{
 do.bind(f, x, m = 1, ...)
 }
@@ -19,12 +19,12 @@ do.bind(f, x, m = 1, ...)
 Matrix or dataframe.
 }
 \description{
-Wrap do.call(*bind(), lapply()) into one function call
+List-apply a function and then bind the results. Effectively, this function calls \code{\link{lapply}}, \code{\link{do.call}}, and either\code{\link{rbind}} or \code{\link{cbind}} depending on the given specifications.
 }
 \details{
-After applying functions such as \code{\link{lapply}} or \code{\link{Map}} to a dataset, \code{\link{do.call}} is often a solution to combine the list elements to obtain the original a tabular format. 
+After applying functions such as \code{\link{lapply}} or \code{\link{Map}} to a dataset, \code{\link{do.call}} is often a solution to combine the list elements to obtain the original tabular format. 
 
-To simplify this process, \code{\link{lapply}} and\code{\link{do.call}} are wrapped into this function, \code{do.bind}: it calls a function on a dataset and binds the elements into a matrix or dataframe (depending on the original collection type). One may achieve similar results with purrr::map_dfr/map_dfc.
+To simplify this process, \code{\link{lapply}} and\code{\link{do.call}} are wrapped into \code{do.bind}: it calls a function on a dataset and binds the elements into a matrix or dataframe (depending on the original collection type). One may achieve similar results with \code{\link{purrr::map_dfr}} or \code{\link{purrr::map_dfc}}.
 
 The type of bind is defined in a binary fashion (1 for row-wise, 2 for column-wise).
 }
@@ -45,5 +45,5 @@ output2 # matrix
 
 }
 \seealso{
-\url{https://github.com/robertschnitman/afp}, \code{\link{lapply}}, \code{\link{do.call}}, \code{\link{rbind}}, \code{\link{cbind}}
+\url{https://github.com/robertschnitman/afp}, \code{\link{lapply}}, \code{\link{do.call}}, \code{\link{rbind}}, \code{\link{cbind}}, \url{https://purrr.tidyverse.org/}
 }
