@@ -11,8 +11,9 @@ Outline
 2.  `do.bind()`
 3.  `mapreduce()`
 4.  `telecast()`
-5.  Conclusion
+5. Conclusion
 6. References
+7. See also
 
 ## 0. Installation
 ---------------
@@ -217,7 +218,9 @@ on feasibility and future needs as appropriate.
 [Julia - `mapreduce()`](https://docs.julialang.org/en/v0.6.1/stdlib/collections/#Base.mapreduce-NTuple%7B4,Any%7D)  
 [Tidyverse - `purrr`](https://purrr.tidyverse.org/)  
 
-While not mentioned in this document, Hadley Wickham's [Advanced R](http://adv-r.had.co.nz/Functionals.html)
-is a fabulous reference for functionals in R.
+## 7. See also
+-------------
+[`afpj`, the Julia-equivalent library for `afp`](https://github.com/robertschnitman/afpj)  
+[Advanced R by Hadley Wickham](http://adv-r.had.co.nz/Functionals.html)
 
 *End of Document*
