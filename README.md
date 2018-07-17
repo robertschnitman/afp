@@ -27,7 +27,7 @@ Outline
 ---------------
 
 The `afp` package--*Applied Functional Programming*--provides
-functionals to simplify iterative processes in R. The Base R `*apply()`
+functions (primarily functionals) to simplify iterative processes in R. The Base R `*apply()`
 family, `purrr` library, and [Julia programming
 language](https://julialang.org/) are the principal influences. The
 former two contain tools essential for functional programming that
