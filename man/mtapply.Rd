@@ -24,6 +24,13 @@ Apply a function over an array by a list of indices. Multivariate version of \co
 \details{
 Unlike \code{\link{tapply}}, one can pass a list of datasets and indices to \code{\link{mtapply}}.
 }
+\examples{
+# For each variable in a dataset, obtain means by a different index.
+A <- mtcars[, c('mpg', 'wt', 'disp')]  # Targets.
+B <- mtcars[, c('gear', 'am', 'carb')] # Indices.
+mtapply(A, B, mean)
+
+}
 \seealso{
 \url{https://github.com/robertschnitman/afp}, \code{\link{tapply}}, \code{\link{mapply}}
 }
