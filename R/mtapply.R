@@ -11,7 +11,7 @@
 #' 
 #' @details Unlike \code{\link{tapply}}, one can pass a list of datasets and indices to \code{\link{mtapply}}.
 #' 
-#' @example
+#' @examples
 #' # For each variable in a dataset, obtain means by a different index.
 #' A <- mtcars[, c('mpg', 'wt', 'disp')]  # Targets.
 #' B <- mtcars[, c('gear', 'am', 'carb')] # Indices.
