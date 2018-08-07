@@ -49,7 +49,7 @@ do.bind <- function(f, x, m = 1, ...) {
     
   } else {
     
-    stop('Invalid rc input. Please specifiy a bind-type of 1 (row-wise) or 2 (column-wise).')
+    stop('Invalid m (margin) input. Please specifiy a bind-type of 1 (row-wise) or 2 (column-wise).')
     
   }
   
