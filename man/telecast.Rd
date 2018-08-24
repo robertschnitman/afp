@@ -4,12 +4,14 @@
 \alias{telecast}
 \title{Apply common function over multiple objects independent of each other}
 \usage{
-telecast(f, l)
+telecast(f, l, ...)
 }
 \arguments{
 \item{f}{A function to apply to the collection(s).}
 
 \item{l}{List of data objects.}
+
+\item{...}{Parameters passed to \code{\link{mapply}}.}
 }
 \value{
 List.
@@ -18,7 +20,7 @@ List.
 Apply common function over multiple objects independent of each other.
 }
 \details{
-Inspired by \code{broadcast} from Julia. Essentially, \code{telecast} wraps \code{\link{mapply}} within \code{\link{lapply}}.
+Inspired by \code{broadcast} from Julia. Essentially, \code{telecast} wraps \code{\link{mapply}} (via \code{\link{dot}}) within \code{\link{lapply}}.
 
 \code{\link{Map}}/\code{\link{mapply}} executes functions pairwise when given multiple data objects. \code{telecast} fills the need to apply a common function against data objects exclusive to each other. 
 
@@ -39,6 +41,6 @@ output2 # Compare: lapply(l, function(x) mapply(red.div, x))
 
 }
 \seealso{
-\url{https://github.com/robertschnitman/afp}, \code{\link{mapply}}, \code{\link{lapply}},  
+\url{https://github.com/robertschnitman/afp}, \code{\link{dot}}, \code{\link{mapply}}, \code{\link{lapply}}, 
 \code{broadcast} from Julia: \url{https://docs.julialang.org/en/v0.6.1/manual/arrays/#Broadcasting-1}
 }

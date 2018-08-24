@@ -32,5 +32,5 @@ mtapply(A, B, mean)
 
 }
 \seealso{
-\url{https://github.com/robertschnitman/afp}, \code{\link{tapply}}, \code{\link{mapply}}
+\url{https://github.com/robertschnitman/afp}, \code{\link{tapply}}, \code{\link{mapply}}, \code{\link{dot}},
 }
