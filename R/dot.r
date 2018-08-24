@@ -9,4 +9,5 @@
 #' @seealso \url{https://github.com/robertschnitman/afp}, \code{\link{mapply}},  
 #' \code{broadcast} from Julia: \url{https://docs.julialang.org/en/v0.6.1/manual/arrays/#Broadcasting-1}
 
+#' @name dot
 . <- function(...) mapply(...)
