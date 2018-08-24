@@ -4,10 +4,11 @@
 #'
 #' @param f A function to apply to the collection(s).
 #' @param l List of data objects.
+#' @param ... Parameters passed to \code{\link{mapply}}.
 #' 
 #' @return List.
 #' 
-#' @details Inspired by \code{broadcast} from Julia. Essentially, \code{telecast} wraps \code{\link{mapply}} within \code{\link{lapply}}.
+#' @details Inspired by \code{broadcast} from Julia. Essentially, \code{telecast} wraps \code{\link{mapply}} (via \code{\link{dot}}) within \code{\link{lapply}}.
 #' 
 #' \code{\link{Map}}/\code{\link{mapply}} executes functions pairwise when given multiple data objects. \code{telecast} fills the need to apply a common function against data objects exclusive to each other. 
 #' 
@@ -26,10 +27,10 @@
 #' output2 <- telecast(red.div, l) 
 #' output2 # Compare: lapply(l, function(x) mapply(red.div, x))
 #' 
-#' @seealso \url{https://github.com/robertschnitman/afp}, \code{\link{mapply}}, \code{\link{lapply}},  
+#' @seealso \url{https://github.com/robertschnitman/afp}, \code{\link{dot}}, \code{\link{mapply}}, \code{\link{lapply}}, 
 #' \code{broadcast} from Julia: \url{https://docs.julialang.org/en/v0.6.1/manual/arrays/#Broadcasting-1}
 
-telecast <- function(f, l) {
+telecast <- function(f, l, ...) {
   
   # 1. Type-check inputs.
   f <- match.fun(f)
@@ -37,9 +38,9 @@ telecast <- function(f, l) {
   if (!is.list(l)) {l <- as.list(l)}
   
   # 2. The function f must be applied to each of the input lists INDEPENDENTLY.
-  output <- lapply(l, function(x) mapply(f, x))
+  output <- lapply(l, function(x) .(f, x, ...))
   
-  # 3. Output must be a list.
+  # 3. Output must be a list to keep each list element separate from each other.
   output
   
 }
