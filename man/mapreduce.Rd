@@ -5,6 +5,8 @@
 \title{Apply function over collection and then iteratively reduce it a la` mapreduce() from Julia}
 \usage{
 mapreduce(f, o, x, y = NULL, ...)
+mrchop(f, o, x, m, ...)
+reducechop(o, x, m = 2,)
 }
 \arguments{
 \item{f}{A function to apply to the collection.}
@@ -16,6 +18,8 @@ mapreduce(f, o, x, y = NULL, ...)
 \item{y}{A list of additional arguments from \code{f}. Passed to MoreArgs from \code{\link{Map}}.}
 
 \item{...}{Arguments passed to \code{\link{Reduce}}.}
+
+\item{m}{Margin. 1 for rows, 2 for columns.}
 }
 \description{
 Apply function over collection and then iteratively reduce it a la` mapreduce() from Julia.
@@ -25,18 +29,25 @@ A simplified \code{mapreduce} from Julia with a multivariate option.
 
 Base R has functionals that output a list by way of \code{\link{lapply()}} and \code{\link{Map}} (among others), while \code{\link{Reduce}} diminishes given elements in a consecutive manner until a single result remains. To reduce the output of a mapping, the mentioned functions are required. 
 
-In turn, \code{mapreduce} simplifies this process.
+In turn, \code{mapreduce} simplifies this process. The functions \code{mrchop} and \code{reducechop} have similar properties.
 }
 \examples{
-# 1. Apply a function to 3 matrices and consecutively divide them.
+# 1. mapreduce: apply a function to 3 matrices and consecutively divide them.
 matrixl <- list(A = matrix(c(1:9), 3, 3), B = matrix(10:18, 3, 3), C = matrix(19:27, 3, 3))
 output1 <- mapreduce(function(x) x^2 + 1, `/`, matrixl) 
 output1 # matrix 3x3
 
-# 2. Use multiple arguments.
+# 2. mapreduce: use multiple arguments.
 matrixl <- list(A = matrix(c(1:9), 3, 3), B = matrix(10:18, 3, 3), C = matrix(19:27, 3, 3))
 output2 <- with(matrixl, mapreduce(function(i, j, k) i*j - k, `/`, A, list(B, C)))
 output2
+
+# 3. mrchop.
+mrchop(function(x) x/2, `+`, mtcars, 1)
+
+# 4. reducechop.
+reducechop(`+`, mtcars, 2) # Column-wise (default).
+reducechop(`/`, mtcars, 1) # Row-wise. Equivalent to Reduce(`/`, mtcars).  
 
 }
 \seealso{
