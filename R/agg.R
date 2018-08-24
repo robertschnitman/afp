@@ -18,11 +18,7 @@
 #' 
 #' @seealso \url{https://github.com/robertschnitman/afp}, \code{\link{aggregate}}, \code{\link{do.call}}, \code{\link{data.frame}}
 
-agg <- function(...) {
-  
-  do.call(data.frame, aggregate(...)) # Unnest aggregate() result when calling multiple functions to be tidy.
-  
-}
+agg <- function(...) do.call(data.frame, aggregate(...))
   
   
   
