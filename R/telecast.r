@@ -38,7 +38,7 @@ telecast <- function(f, l, ...) {
   if (!is.list(l)) {l <- as.list(l)}
   
   # 2. The function f must be applied to each of the input lists INDEPENDENTLY.
-  output <- lapply(l, function(x) .(f, x, ...))
+  output <- lapply(l, function(x) mapply(f, x, ...))
   
   # 3. Output must be a list to keep each list element separate from each other.
   output
