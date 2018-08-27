@@ -30,7 +30,7 @@ mtapply <- function(X, INDEX, FUN = NULL, ...) {
   # 2. Generalize tapply for the multivariate case.
   tapfun <- function(a, b) tapply(a, b, FUN) # Writing the tapply() on this line makes the output-assignment line more readable than otherwise.
   
-  output <- .(tapfun, X, INDEX, ...)
+  output <- mapply(tapfun, X, INDEX, ...)
   
   # 3. Edit names of the output to differentiate/identify the target and associated index.
   names(output) <- paste0(names(output), '_by_', names(INDEX))
