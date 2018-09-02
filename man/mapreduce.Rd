@@ -27,9 +27,9 @@ Apply function over collection and then iteratively reduce it a la` mapreduce() 
 \details{
 A simplified \code{mapreduce} from Julia with a multivariate option.
 
-Base R has functionals that output a list by way of \code{\link{lapply()}} and \code{\link{Map}} (among others), while \code{\link{Reduce}} diminishes given elements in a consecutive manner until a single result remains. To reduce the output of a mapping, the mentioned functions are required. 
+Base R has functionals that output a list by way of \code{\link{lapply()}} and \code{\link{Map}} (among others), while \code{\link{Reduce}} diminishes given elements in a consecutive manner until a single result remains. To reduce the output of a mapping, the mentioned functions are required. In turn, \code{mapreduce} simplifies this process. 
 
-In turn, \code{mapreduce} simplifies this process. The functions \code{mrchop} and \code{reducechop} have similar properties.
+The functions \code{mrchop} and \code{reducechop} have similar properties. The former applies \code{mapreduce} row-wise or column-wise, which can be specified; the latter applies \code{Reduce} in the same manner.
 }
 \examples{
 # 1. mapreduce: apply a function to 3 matrices and consecutively divide them.
