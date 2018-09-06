@@ -144,7 +144,7 @@ streamline the intended procedure in R.
 
 `Map()`/`mapply()` from Base R executes functions pairwise when given
 multiple data objects, as do `map2()`/`pmap()` from `purrr`. While
-beneficial in its own right, said functions cannot concisely map over
+beneficial in their own right, said functions cannot concisely map over
 datasets *independently* of each other, which would be useful for
 storing disparate information into a single list.
 
