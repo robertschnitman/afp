@@ -12,8 +12,9 @@
 #' 
 #' @details Essentially, \code{mop} is a wrapper for \code{sweep(x, MARGIN, apply(...), FUN)}. Useful for indexing variables by their means, for example, so that the magnitude of a value relative to its average is known.
 #' 
-#' @example
+#' @examples
 #' mop(`/`, mean, mtcars, 2) # == sweep(mtcars, 2, apply(mtcars, 2, mean), `/`)
+#' mop(`/`, median, mtcars, 2)
 #'
 #' @seealso \url{https://github.com/robertschnitman/afp}, \code{\link{sweep}}
 
