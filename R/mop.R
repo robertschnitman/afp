@@ -25,7 +25,7 @@ mop <- function(f, s, x, m, ...) {
   s <- match.fun(s)
   
   diml <- length(dim(x))
-  if (!diml) stop('dim(x) must have a positive length.')
+  if (!diml) stop('dim(x) must have a positive length. Please make sure x is an array!')
   
   if (!any(m == 1:2)) stop('The m (margin) input must either be 1 (row-wise) or 2 (column-wise).')
   
