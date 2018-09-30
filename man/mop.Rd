@@ -4,16 +4,14 @@
 \alias{mop}
 \title{Mop an array with multiple functions}
 \usage{
-mop(f, s, x, m, ...)
+mop(x, m, s, f, ...)
 }
 \arguments{
-\item{f}{A function, typically a binary operator.}
+\item{x}{An array.}
 
 \item{s}{A summary statistic function such as \code{\link{mean}}.}
 
-\item{x}{An array.}
-
-\item{m}{Margin. 1 for rows, 2 for columns.}
+\item{f}{A function to be "swept" or "mopped" out, typically a binary operator.}
 
 \item{...}{Arguments passed to \code{\link{sweep}}.}
 }
@@ -24,8 +22,8 @@ Based on \code{\link{sweep}}, operate on an array by a summary statistic functio
 Essentially, \code{mop} is a wrapper for \code{sweep(x, MARGIN, apply(...), FUN)}. Useful for indexing variables by their means, for example, so that the magnitude of a value relative to its average is known.
 }
 \examples{
-mop(`/`, mean, mtcars, 2) # == sweep(mtcars, 2, apply(mtcars, 2, mean), `/`)
-mop(`/`, median, mtcars, 2)
+mop(mtcars, 2, mean, `/`) # == sweep(mtcars, 2, apply(mtcars, 2, mean), `/`)
+mop(mtcars, 2, median, `/`)
 
 }
 \seealso{
