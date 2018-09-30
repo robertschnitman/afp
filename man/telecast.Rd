@@ -5,6 +5,7 @@
 \title{Apply common function over multiple objects independent of each other}
 \usage{
 telecast(f, l, ...)
+chain(f, l)
 }
 \arguments{
 \item{f}{A function to apply to the collection(s).}
@@ -14,17 +15,10 @@ telecast(f, l, ...)
 \item{...}{Parameters passed to \code{\link{mapply}}.}
 }
 \value{
-List.
+List for \code{telecast}, matrix for \code{chain}.
 }
 \description{
 Apply common function over multiple objects independent of each other.
-}
-\details{
-Inspired by \code{broadcast} from Julia. Essentially, \code{telecast} wraps \code{\link{mapply}} (via \code{\link{dot}}) within \code{\link{lapply}}.
-
-\code{\link{Map}}/\code{\link{mapply}} executes functions pairwise when given multiple data objects. \code{telecast} fills the need to apply a common function against data objects exclusive to each other. 
-
-Useful for storing disparate information into a single list.
 }
 \examples{
 l <- list(mc = mtcars, aq = airquality, lcs = LifeCycleSavings) # Store to reference easily for the two examples below.
@@ -38,6 +32,10 @@ output1 # Compare: lapply(l, function(x) mapply(mean.nr, x))
 red.div <- function(y) Reduce(`/`, y)
 output2 <- telecast(red.div, l) 
 output2 # Compare: lapply(l, function(x) mapply(red.div, x))
+
+## 3. Apply function to subsets and output to matrix.
+l <- split(mtcars, mtcars$cyl) 
+chain(mean, l) # all(chain(mean, l) == t(sapply(l, function(z) sapply(z, mean))))
 
 }
 \seealso{
