@@ -2,23 +2,23 @@
 #' 
 #' @description Based on \code{\link{sweep}}, operate on an array by a summary statistic function.
 #' 
-#' @usage mop(f, s, x, m, ...)
+#' @usage mop(x, m, s, f, ...)
 #'
-#' @param f A function, typically a binary operator.
-#' @param s A summary statistic function such as \code{\link{mean}}.
 #' @param x An array.
-#' @param m Margin. 1 for rows, 2 for columns.
+#' @param m Margin. 1 for rows, 2 for columns.\
+#' @param s A summary statistic function such as \code{\link{mean}}.
+#' @param f A function to be "swept" or "mopped" out, typically a binary operator.
 #' @param ... Arguments passed to \code{\link{sweep}}.
 #' 
 #' @details Essentially, \code{mop} is a wrapper for \code{sweep(x, MARGIN, apply(...), FUN)}. Useful for indexing variables by their means, for example, so that the magnitude of a value relative to its average is known.
 #' 
 #' @examples
-#' mop(`/`, mean, mtcars, 2) # == sweep(mtcars, 2, apply(mtcars, 2, mean), `/`)
-#' mop(`/`, median, mtcars, 2)
+#' mop(mtcars, 2, mean, `/`) # == sweep(mtcars, 2, apply(mtcars, 2, mean), `/`)
+#' mop(mtcars, 2, median, `/`)
 #'
 #' @seealso \url{https://github.com/robertschnitman/afp}, \code{\link{sweep}}
 
-mop <- function(f, s, x, m, ...) {
+mop <- function(x, m, s, f, ...) {
   
   # 1. Check inputs.
   f <- match.fun(f)
