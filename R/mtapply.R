@@ -2,6 +2,8 @@
 #' 
 #' @description Apply a function over an array by a list of indices. Multivariate version of \code{\link{tapply}}.
 #' 
+#' @usage mtapply(X, INDEX, FUN = NULL, ...)
+#' 
 #' @param X Object where \code{\link{split}} is applicable. See \code{\link{tapply}}.
 #' @param INDEX List of indices. See \code{\link{tapply}} for univariate case.
 #' @param FUN Function to apply. See \code{\link{tapply}}.

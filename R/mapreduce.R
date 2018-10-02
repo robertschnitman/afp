@@ -4,7 +4,7 @@
 #' 
 #' @usage mapreduce(f, o, x, y = NULL, ...)
 #' mrchop(f, o, x, m, ...)
-#' reducechop(o, x, m = 2,)
+#' reducechop(o, x, m, ...)
 #'
 #' @param f A function to apply to the collection.
 #' @param o A binary operator. Typically arithmetic operators, but can be another (binary) function.
@@ -73,7 +73,7 @@ mrchop <- function(f, o, x, m, ...) {
 
 
 #' @rdname reducechop
-reducechop <- function(o, x, m = 2, ...) {
+reducechop <- function(o, x, m, ...) {
   
   # 1. Type-check inputs.
   o <- match.fun(o)

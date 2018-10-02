@@ -2,6 +2,8 @@
 #' 
 #' @description List-apply a function and then bind the results. Effectively, this function calls \code{\link{lapply}}, \code{\link{do.call}}, and either\code{\link{rbind}} or \code{\link{cbind}} depending on the given specifications.
 #'
+#' @usage do.bind(f, x, m = 1, ...)
+#'
 #' @param f A function to apply to the collection.
 #' @param x A collection, such as a list, matrix, or dataframe.
 #' @param m Margin. 1 to call \code{\link{rbind}} (default) and 2 for \code{\link{cbind}}.

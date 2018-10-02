@@ -1,6 +1,9 @@
 #' Compact mapply() a la` broadcast() from Julia
 #' 
 #' @description Inspired by the dot syntax from Julia's \code{broadcast}, execute mapply() with a convenient shortand.
+#' 
+#' @usage bcast(f, x, ..., simplify = FALSE)
+#' .(f, x, ..., simplify = FALSE)
 #'
 #' @param f Function.
 #' @param x First argument to vectorize over.
