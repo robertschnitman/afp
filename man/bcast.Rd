@@ -5,6 +5,7 @@
 \title{Compact mapply() a la` broadcast() from Julia}
 \usage{
 bcast(f, x, ..., simplify = FALSE)
+.(f, x, ..., simplify = FALSE)
 }
 \arguments{
 \item{f}{Function.}

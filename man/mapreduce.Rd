@@ -6,7 +6,7 @@
 \usage{
 mapreduce(f, o, x, y = NULL, ...)
 mrchop(f, o, x, m, ...)
-reducechop(o, x, m = 2,)
+reducechop(o, x, m, ...)
 }
 \arguments{
 \item{f}{A function to apply to the collection.}
