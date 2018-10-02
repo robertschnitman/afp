@@ -47,7 +47,6 @@ mapreduce <- function(f, o, x, y = NULL, ...) {
   o <- match.fun(o)
   
   # 2. Map the function f to collection x and iteratively reduce the mapping by the binary operator o.
-  # output <- Reduce(o, mapply(f, x, MoreArgs = y, SIMPLIFY = FALSE), ...)
   output <- Reduce(o, Map(f, x, MoreArgs = y), ...)
   
   # 3. Output should be a matrix or data frame.
