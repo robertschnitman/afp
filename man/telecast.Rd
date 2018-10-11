@@ -4,13 +4,15 @@
 \alias{telecast}
 \title{Apply common function over multiple objects independent of each other}
 \usage{
-telecast(f, l, ...)
+telecast(f, l, as.vector = FALSE, ...)
 chain(f, l)
 }
 \arguments{
 \item{f}{A function to apply to the collection(s).}
 
 \item{l}{List of data objects.}
+
+\item{as.vector}{FALSE (default) for list output; TRUE for vector.}
 
 \item{...}{Parameters passed to \code{\link{mapply}}.}
 }
@@ -25,8 +27,8 @@ l <- list(mc = mtcars, aq = airquality, lcs = LifeCycleSavings) # Store to refer
 
 ## 1. Extract means for each variable from 3 datasets.
 mean.nr <- function(x) mean(x, na.rm = TRUE) # airquality has NA values.
-output1 <- telecast(mean.nr, l) 
-output1 # Compare: lapply(l, function(x) mapply(mean.nr, x))
+output1a <- telecast(mean.nr, l) # Compare: lapply(l, function(x) mapply(mean.nr, x))
+output1b <- telecast(mean.nr, l) # == rapply(l, mean.nr))
 
 ## 2. Derive distinct iterative reductions along with Reduce().
 red.div <- function(y) Reduce(`/`, y)
