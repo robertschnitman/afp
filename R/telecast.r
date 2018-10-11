@@ -2,11 +2,12 @@
 #' 
 #' @description Apply common function over multiple objects independent of each other.
 #'
-#' @usage telecast(f, l, ...)
+#' @usage telecast(f, l, as.vector = FALSE, ...)
 #' chain(f, l)
 #' 
 #' @param f A function to apply to the collection(s).
 #' @param l List of data objects.
+#' @param as.vector FALSE (default) for list output; TRUE for vector.
 #' @param ... Parameters passed to \code{\link{mapply}}.
 #' 
 #' @return List for \code{telecast}, matrix for \code{chain}.
@@ -22,8 +23,8 @@
 #' 
 #' ## 1. Extract means for each variable from 3 datasets.
 #' mean.nr <- function(x) mean(x, na.rm = TRUE) # airquality has NA values.
-#' output1 <- telecast(mean.nr, l) 
-#' output1 # Compare: lapply(l, function(x) mapply(mean.nr, x))
+#' output1a <- telecast(mean.nr, l) # Compare: lapply(l, function(x) mapply(mean.nr, x))
+#' output1b <- telecast(mean.nr, l) # == rapply(l, mean.nr))
 #' 
 #' ## 2. Derive distinct iterative reductions along with Reduce().
 #' red.div <- function(y) Reduce(`/`, y)
@@ -38,7 +39,7 @@
 #' \code{broadcast} from Julia: \url{https://docs.julialang.org/en/v0.6.1/manual/arrays/#Broadcasting-1}
 
 #' @rdname telecast
-telecast <- function(f, l, ...) {
+telecast <- function(f, l, as.vector = FALSE, ...) {
   
   # 1. Type-check inputs.
   f <- match.fun(f)
@@ -48,8 +49,16 @@ telecast <- function(f, l, ...) {
   # 2. The function f must be applied to each of the input lists INDEPENDENTLY.
   output <- lapply(l, function(x) mapply(f, x, ...))
   
-  # 3. Output must be a list to keep each list element separate from each other.
-  output
+  # 3. Output must be either a list
+  if (as.vector == FALSE) {
+    
+    output
+    
+  } else {
+    
+    do.call(c, output)
+    
+  }
   
 }
 
