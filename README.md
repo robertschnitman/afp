@@ -153,55 +153,51 @@ Julia](https://docs.julialang.org/en/v0.6.1/manual/arrays/#Broadcasting-1),
 `telecast()` essentially wraps `mapply()` within `lapply()` to achieve
 this outcome.
 
-The two functions (both required) are `f` and `l`, respectively a
-function and list.
+The two functions (both required) are `f` and `l`, respectively a function and list. The third, optional parameter is `as.vector`, which converts the output to a vector if set to `TRUE` (and thus will resemble the output from `rapply()`); by default, it is `FALSE` for a list format.
 
 ### EXAMPLE - `telecast()` \#1: Apply means to each variable for all datasets in a stored list.
+```{r s4-1}
+l <- list(mc = mtcars, aq = airquality, lcs = LifeCycleSavings)
 
-    l <- list(mc = mtcars, aq = airquality, lcs = LifeCycleSavings)
+mean.nr <- function(x) mean(x, na.rm = TRUE) # airquality has NA values.
+output1 <- telecast(mean.nr, l) 
+output1 # Compare: lapply(l, function(x) mapply(mean.nr, x))
 
-    mean.nr <- function(x) mean(x, na.rm = TRUE) # airquality has NA values.
-    output1 <- telecast(mean.nr, l) 
-    output1 # Compare: lapply(l, function(x) mapply(mean.nr, x))
+## $`mc`
+##        mpg        cyl       disp         hp       drat         wt 
+## 20.090625   6.187500 230.721875 146.687500   3.596563   3.217250 
+##       qsec         vs         am       gear       carb 
+## 17.848750   0.437500   0.406250   3.687500   2.812500 
+## 
+## $aq
+##      Ozone    Solar.R       Wind       Temp      Month        Day 
+##  42.129310 185.931507   9.957516  77.882353   6.993464  15.803922 
+## 
+## $lcs
+##        sr     pop15     pop75       dpi      ddpi 
+##    9.6710   35.0896    2.2930 1106.7584    3.7576 
 
-    ## $mc
-    ##        mpg        cyl       disp         hp       drat         wt 
-    ##  20.090625   6.187500 230.721875 146.687500   3.596563   3.217250 
-    ##       qsec         vs         am       gear       carb 
-    ##  17.848750   0.437500   0.406250   3.687500   2.812500 
-    ## 
-    ## $aq
-    ##      Ozone    Solar.R       Wind       Temp      Month        Day 
-    ##  42.129310 185.931507   9.957516  77.882353   6.993464  15.803922 
-    ## 
-    ## $lcs
-    ##        sr     pop15     pop75       dpi      ddpi 
-    ##    9.6710   35.0896    2.2930 1106.7584    3.7576
+```
 
-### EXAMPLE - `telecast()` \#2: Iteratively reduce each variable for all datasets in a list.
+### EXAMPLE - `telecast()` \#2: Iteratively reduce each variable for all datasets in a list and store in a vector.
+```{r s4-2}
+# With the same list in the previous example...
 
-    # With the same list in the previous example...
-    red.div <- function(y) Reduce(`/`, y)
-    output2 <- telecast(red.div, l) 
-    output2 # Compare: lapply(l, function(x) mapply(red.div, x))
+red.div <- function(y) Reduce(`/`, na.omit(y))
+output2 <- telecast(red.div, l, as.vector = TRUE) 
+output2 # Compare: rapply(l, red.div)
 
-    ## $mc
-    ##          mpg          cyl         disp           hp         drat 
-    ## 3.488260e-39 6.971465e-24 9.175733e-70 1.724534e-64 3.483381e-17 
-    ##           wt         qsec           vs           am         gear 
-    ## 1.767344e-15 2.807034e-38          NaN          Inf 2.126822e-17 
-    ##         carb 
-    ## 1.149781e-11 
-    ## 
-    ## $aq
-    ##         Ozone       Solar.R          Wind          Temp         Month 
-    ##            NA            NA 5.634846e-147 5.949698e-286 3.666302e-127 
-    ##           Day 
-    ## 2.556316e-167 
-    ## 
-    ## $lcs
-    ##            sr         pop15         pop75           dpi          ddpi 
-    ##  2.774085e-44  2.731185e-74  7.078060e-14 2.849951e-136  5.292273e-23
+##      mc.mpg        mc.cyl       mc.disp         mc.hp       mc.drat 
+## 3.488260e-39  6.971465e-24  9.175733e-70  1.724534e-64  3.483381e-17 
+##        mc.wt       mc.qsec         mc.vs         mc.am       mc.gear 
+## 1.767344e-15  2.807034e-38           NaN           Inf  2.126822e-17 
+##      mc.carb      aq.Ozone    aq.Solar.R       aq.Wind       aq.Temp 
+## 1.149781e-11 1.016406e-169 1.081719e-313 5.634846e-147 5.949698e-286 
+##     aq.Month        aq.Day        lcs.sr     lcs.pop15     lcs.pop75 
+## 3.666302e-127 2.556316e-167  2.774085e-44  2.731185e-74  7.078060e-14 
+##      lcs.dpi      lcs.ddpi 
+## 2.849951e-136  5.292273e-23 
+```
 
 ## 5. Conclusion
 -------------
