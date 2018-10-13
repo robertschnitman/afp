@@ -4,7 +4,7 @@
 
 ## 1. About
 
-The function `chain()`, created under `telecast.r`, is a simplification
+The function `chain()` from `telecast.r` is a simplification
 of `telecast()`: the output will be a matrix via `sapply()`.
 
     chain <- function(f, l) {
@@ -41,7 +41,17 @@ of `telecast()`: the output will be a matrix via `sapply()`.
 
     ## [1] TRUE
 
-    barplot(output[, 'mpg'], col = 'cyan3', ylab = 'Mean MPG', xlab = 'Number of Cylinders')
+    par (mfrow = c(4, 3))
+
+	for (i in 1:NCOL(output)) {
+	
+	  barplot(output[, i], 
+	          col  = 'cyan3', 
+			  xlab = 'Number of Cylinders', 
+			  ylab = paste('Mean', colnames(output)[i]))
+	
+	}
+
 
 ![](plots//chain_ex1.png)
 
