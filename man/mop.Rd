@@ -9,6 +9,8 @@ mop(x, m, s, f, ...)
 \arguments{
 \item{x}{An array.}
 
+\item{m}{Margin. 1 for rows, 2 for columns.}
+
 \item{s}{A summary statistic function such as \code{\link{mean}}.}
 
 \item{f}{A function to be "swept" or "mopped" out, typically a binary operator.}
