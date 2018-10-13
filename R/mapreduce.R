@@ -61,10 +61,10 @@ mrchop <- function(f, o, x, m, ...) {
   f <- match.fun(f)
   o <- match.fun(o)
   
-  stopifnot(is.matrix(x) | is.data.frame(x))                           # Intent is that x is 2D.
+  stopifnot(is.matrix(x) | is.data.frame(x)) # Intent is that x is 2D.
   
   # 2. Use apply() to set margins.
-  output <- apply(x, m, function(z) mapreduce(f, o, z, y = NULL, ...)) # mrchop() is not multivariate.
+  output <- apply(x, m, function(z) mapreduce(f, o, z, y = NULL, ...)) # Multivariate options have not been tested.
   
   # 3. Output should be a 2 dimensional dataset (matrix/data frame)
   output
@@ -87,7 +87,7 @@ reducechop <- function(o, x, m, ...) {
   }
   
   # 2. Use apply() to set margins.
-  output <- apply(x, m, function(z) Reduce(o, z, ...)) # mrchop() is not multivariate.
+  output <- apply(x, m, function(z) Reduce(o, z, ...)) # Multivariate options have not been tested.
   
   # 3. Output should be a vector.
   output
