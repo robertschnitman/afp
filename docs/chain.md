@@ -35,6 +35,6 @@ of `telecast()`: the output will be a matrix via `sapply()`.
 
     barplot(output[, 'mpg'], col = 'cyan3', ylab = 'Mean MPG', xlab = 'Number of Cylinders')
 
-![](chain_files/figure-markdown_strict/example-1.png)
+![](plots//chain_ex1.png)
 
 *End of Document*
