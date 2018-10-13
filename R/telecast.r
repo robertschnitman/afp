@@ -33,7 +33,8 @@
 #' 
 #' ## 3. Apply function to subsets and output to matrix.
 #' l <- split(mtcars, mtcars$cyl) 
-#' chain(mean, l) # all(chain(mean, l) == t(sapply(l, function(z) sapply(z, mean))))
+#' output <- chain(mean, l) # all(chain(mean, l) == t(sapply(l, function(z) sapply(z, mean))))
+#' barplot(output[, 'mpg'], col = 'cyan3', ylab = 'Mean MPG', xlab = 'cyl')
 #' 
 #' @seealso \url{https://github.com/robertschnitman/afp}, \code{\link{dot}}, \code{\link{mapply}}, \code{\link{lapply}}, 
 #' \code{broadcast} from Julia: \url{https://docs.julialang.org/en/v0.6.1/manual/arrays/#Broadcasting-1}
