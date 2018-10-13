@@ -3,7 +3,6 @@
 **Date:** "October 13, 2018"  
 
 ## 1. About
---------
 
 The function `chain()`, created under `telecast.r`, is a simplification
 of `telecast()`: the output will be a matrix via `sapply()`.
@@ -24,7 +23,6 @@ of `telecast()`: the output will be a matrix via `sapply()`.
     }
 
 ## 2. Example
-----------
 
     l <- split(mtcars, mtcars$cyl) 
     output <- chain(mean, l)
