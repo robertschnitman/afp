@@ -47,8 +47,8 @@ of `telecast()`: the output will be a matrix via `sapply()`.
 	
 	  barplot(output[, i], 
 	          col  = 'cyan3', 
-			  xlab = 'Number of Cylinders', 
-			  ylab = paste('Mean', colnames(output)[i]))
+	          xlab = 'Number of Cylinders', 
+		  ylab = paste('Mean', colnames(output)[i]))
 	
 	}
 
