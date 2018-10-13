@@ -5,7 +5,7 @@
 #' @usage mop(x, m, s, f, ...)
 #'
 #' @param x An array.
-#' @param m Margin. 1 for rows, 2 for columns.\
+#' @param m Margin. 1 for rows, 2 for columns.
 #' @param s A summary statistic function such as \code{\link{mean}}.
 #' @param f A function to be "swept" or "mopped" out, typically a binary operator.
 #' @param ... Arguments passed to \code{\link{sweep}}.
