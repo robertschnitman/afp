@@ -37,7 +37,8 @@ output2 # Compare: lapply(l, function(x) mapply(red.div, x))
 
 ## 3. Apply function to subsets and output to matrix.
 l <- split(mtcars, mtcars$cyl) 
-chain(mean, l) # all(chain(mean, l) == t(sapply(l, function(z) sapply(z, mean))))
+output <- chain(mean, l) # all(chain(mean, l) == t(sapply(l, function(z) sapply(z, mean))))
+barplot(output[, 'mpg'], col = 'cyan3', ylab = 'Mean MPG', xlab = 'cyl')
 
 }
 \seealso{
