@@ -5,7 +5,7 @@
 ## 1. About
 
 The function `chain()` from `telecast.r` is a simplification
-of `telecast()`: the output will be a matrix via `sapply()`.
+of `telecast()`: the output is a matrix via `sapply()`.
 
     chain <- function(f, l) {
       
