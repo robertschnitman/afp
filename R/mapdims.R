@@ -19,6 +19,8 @@
 
 mapdims <- function(f, x, ...) {
   
+  stopifnot(length(dim(x)) == 2)
+  
   output <- lapply(1:2, function(i) apply(x, i, mean, ...))
   
   names(output) <- c('rowwise', 'colwise')
