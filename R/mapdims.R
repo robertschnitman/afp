@@ -19,11 +19,14 @@
 
 mapdims <- function(f, x, ...) {
   
+  ## 1. Type-check data object x--must be 2D due to apply().
   stopifnot(length(dim(x)) == 2)
   
+  ## 2. For each dimension, apply the function.
+  # Row results first to coincide with R conventions.
   output <- lapply(1:2, function(i) apply(x, i, mean, ...))
   
-  names(output) <- c('rowwise', 'colwise')
+  names(output) <- c('rowwise', 'colwise') # To denote the dimension-specific results.
   
   output
   
