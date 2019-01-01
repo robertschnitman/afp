@@ -153,7 +153,7 @@ Julia](https://docs.julialang.org/en/v0.6.1/manual/arrays/#Broadcasting-1),
 `telecast()` essentially wraps `mapply()` within `lapply()` to achieve
 this outcome.
 
-The two functions (both required) are `f` and `l`, respectively a function and list. The third, optional parameter is `as.vector`, which converts the output to a vector if set to `TRUE` (and thus will resemble the output from `rapply()`); by default, it is `FALSE` for a list format.
+The two functions (both required) are `f` and `l`, respectively a function and list. The third parameter `as.vector`, which is optional, converts the output to a vector if set to `TRUE` (and thus will resemble the output from `rapply()`); by default, it is `FALSE` for a list format.
 
 ### EXAMPLE - `telecast()` \#1: Apply means to each variable for all datasets in a stored list.
 ```{r s4-1}
