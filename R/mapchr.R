@@ -11,7 +11,7 @@
 #' 
 #' @return Vector.
 #' 
-#' @details `mapchr()` is a general functional for altering character vectors: apply any function to each of its element. The function `reverse()` reverses the order of characters for each element. `anagram(x)` randomly changes the order of the characters in every element.
+#' @details `mapchr()` is a general functional for altering character vectors: apply any function to each of its elements. The function `reverse()` reverses the order of characters for each element. `anagram(x)` randomly changes the order of the characters in every element.
 #' 
 #' @examples
 #' rn_mc <- rownames(mtcars)
