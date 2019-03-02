@@ -2,11 +2,11 @@
 % Please edit documentation in R/mapchr.R
 \name{mapchr}
 \alias{mapchr}
-\title{Apply functions to character vectors}
+\title{Manipulate individual elements in a character vector}
 \usage{
 mapchr(f, x)
 reverse(x)
-anagram(x)
+jumble(x)
 }
 \arguments{
 \item{f}{Function to apply to the character vector `x`.}
@@ -17,15 +17,15 @@ anagram(x)
 Vector.
 }
 \description{
-Apply functions that manipulate character/string vectors.
+Apply functions that manipulate character/string vectors. Useful for reordering the characters in each vector element, for example.
 }
 \details{
-`mapchr()` is a general functional for altering character vectors: apply any function to each of its elements. The function `reverse()` reverses the order of characters for each element. `anagram(x)` randomly changes the order of the characters in every element. Similar to `map_chr()` from the `purrr` library with the exception that the former only accepts character vectors as the data input.
+`mapchr()` is a general functional for altering character vectors: apply any function to each of its elements. The function `reverse()` reverses the order of characters for each element. `jumble(x)` randomly changes the order of the characters in every element. Similar to `map_chr()` from the `purrr` library with the exception that the former only accepts character vectors as the data input. These functions are useful when manipulating the arrangement of the characters is desired.
 }
 \examples{
 rn_mc <- rownames(mtcars)
 mapchr(function(x) paste0(x, collapse = '|'), rn_mc)
 reverse(rn_mc)
-anagram(rn_mc)
+jumble(rn_mc)
 
 }
