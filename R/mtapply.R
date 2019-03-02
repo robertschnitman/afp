@@ -21,6 +21,7 @@
 #' 
 #' @seealso \url{https://github.com/robertschnitman/afp}, \code{\link{tapply}}, \code{\link{mapply}}, \code{\link{dot}},
 
+#' @rdname mtapply
 mtapply <- function(X, INDEX, FUN = NULL, ...) {
   
   # 1. Type-check inputs.
@@ -40,3 +41,6 @@ mtapply <- function(X, INDEX, FUN = NULL, ...) {
   output # Output = list. See tapply documentation.
   
 }
+
+#' @rdname tapplym
+tapplym <- mtapply # Synonym. For predictive text.
