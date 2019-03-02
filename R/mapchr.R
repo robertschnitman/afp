@@ -1,6 +1,6 @@
-#' Apply functions to character vectors
+#' Manipulate individual elements in a character vector
 #' 
-#' @description Apply functions that manipulate character/string vectors.
+#' @description Apply functions that manipulate character/string vectors. Useful for reordering the characters in each vector element, for example.
 #'
 #' @usage mapchr(f, x)
 #' reverse(x)
