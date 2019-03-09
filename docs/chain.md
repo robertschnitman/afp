@@ -1,6 +1,6 @@
-**Title:** "chain"  
-**Author:** "Robert Schnitman"  
-**Date:** "October 13, 2018"  
+**Title:** chain()  
+**Author:** Robert Schnitman
+**Date:** October 13, 2018
 
 ## 1. About
 
