@@ -5,24 +5,30 @@
 \title{Map over matrix dimensions separately in a single function call}
 \usage{
 mapdims(f, x, ...)
+mapc(f, x)
+mapr(f, x)
 }
 \arguments{
 \item{f}{A function to apply to the 2D dataset.}
 
-\item{x}{A 2D dataset, such as a matrix or data frame.}
+\item{x}{A dataset, such as an array or data frame.}
 
 \item{...}{Arguments passed to the \code{f}.}
 }
 \value{
-List. Two elements: \code{rowwise} for the row-wise computations, and \code{colwise} for the column-specific results.
+List for mapdims(). Two elements: \code{rowwise} for the row-wise computations, and \code{colwise} for the column-specific results. Output is array for `mapc()` and `mapr()`
 }
 \description{
-Apply function over dimensions and save the column- and row-wise results separately in a list.
+Map over matrix dimensions separately in a single function call
+}
+\details{
+Apply function over dimensions and save the column- and row-wise results separately in a list with `mapdims()`; convenient `apply()` abbreviations with `mapc()` and `mapr()`.
 }
 \examples{
 mapdims(median, mtcars)
-
 mapdims(mean, airquality, na.rm = TRUE)
+mapc(median, mtcars)
+mapr(median, mtcars) 
 
 }
 \seealso{
