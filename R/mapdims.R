@@ -7,7 +7,7 @@
 #' mapr(f, x)
 #'
 #' @param f A function to apply to the 2D dataset.
-#' @param x A 2D dataset, such as a matrix or data frame.
+#' @param x A dataset, such as an array or data frame.
 #' @param ... Arguments passed to the \code{f}.
 #' 
 #' @return List for mapdims(). Two elements: \code{rowwise} for the row-wise computations, and \code{colwise} for the column-specific results. Output is array for `mapc()` and `mapr()`
