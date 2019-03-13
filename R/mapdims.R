@@ -26,7 +26,8 @@
 mapdims <- function(f, x, ...) {
   
   ## 1. Type-check data object x.
-  stopifnot(length(dim(x)) >= 2) # for arrays.
+  diml <- length(dim(x))
+  if (!diml) stop('dim(x) must have a positive length. Please make sure x has at least 2 dimensions!')
   
   ## 2. For each dimension, apply the function.
   # Row results first to coincide with R conventions.
