@@ -39,6 +39,7 @@ mapbind <- function(x, y) {
   
 }
 
+pairbind <- mapbind # synonym
 
 mapbind_df <- function(x, y) {
   
@@ -49,3 +50,5 @@ mapbind_df <- function(x, y) {
   output
   
 }
+
+pairbind_df <- mapbind_df # synonym
