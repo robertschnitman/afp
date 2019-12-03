@@ -38,3 +38,5 @@ mop <- function(x, m, s, f, ...) {
   output
   
 }
+
+smop <- function(x, s, f, ...) mop(x, 2, s, f, ...)
