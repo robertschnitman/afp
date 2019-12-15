@@ -4,7 +4,7 @@
 \alias{mop}
 \title{Mop an array with multiple functions}
 \usage{
-mop(x, m, s, f, ...), smop(x, s, f, ...)
+mop(x, m, s, f, ...), smop(x, s, f, ...), mop_div(x, s, ...)
 }
 \arguments{
 \item{x}{An array.}
@@ -21,7 +21,7 @@ mop(x, m, s, f, ...), smop(x, s, f, ...)
 Based on \code{\link{sweep}}, operate on an array by a summary statistic function.
 }
 \details{
-Essentially, \code{mop} is a wrapper for \code{sweep(x, MARGIN, apply(...), FUN)}. Useful for indexing variables by their means, for example, so that the magnitude of a value relative to its average is known. The function \code{smop} simplifies \code{mop} by operating only on columns.
+Essentially, \code{mop} is a wrapper for \code{sweep(x, MARGIN, apply(...), FUN)}. Useful for indexing variables by their means, for example, so that the magnitude of a value relative to its average is known. The function \code{smop} simplifies \code{mop} by operating only on columns. The function \code{mop_div} simplifies \code{mop} further by operating only on columns and assuming \code{f} to be \code{`/`}.
 }
 \examples{
 mop(mtcars, 2, mean, `/`) # == sweep(mtcars, 2, apply(mtcars, 2, mean), `/`)
