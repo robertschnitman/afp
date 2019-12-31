@@ -108,13 +108,11 @@ Base R has functionals that output a list by way of `lapply()` and
 consecutive manner until a single result remains. While these functions
 are relatively straightforward to combine (depending on the functions
 being passed), R does not inherently possess a singular function to
-accomplish this operation [unlike Julia with `mapreduce()`](https://docs.julialang.org/en/v0.6.1/stdlib/collections/#Base.mapreduce-NTuple%7B4,Any%7D).
+accomplish this operation [unlike Julia with `mapreduce()`](https://docs.julialang.org/en/v0.6.1/stdlib/collections/#Base.mapreduce-NTuple%7B4,Any%7D). Therefore, `mapreduce()` in `afp` offers a simplified Julia-equivalent to
+streamline the intended procedure in R.
 
 The three required parameters are `f`, `o`, and `x` ("fox",
 collectively)--function, (binary) operator, and collection (e.g. matrix). If `f` is multivariate, the fourth parameter `y` can take multiple arguments much like `MoreArgs` in `mapply()`. The final parameter `...` passes to `Reduce()`.
-
-In turn, `mapreduce()` in `afp` offers a simplified Julia-equivalent to
-streamline the intended procedure in R.
 
 ### EXAMPLE - `mapreduce()` \#1: Element-wise divide manipulated matrices.
 
