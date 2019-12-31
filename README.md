@@ -215,7 +215,7 @@ on feasibility and future needs as appropriate.
 
 ## 7. See also
 -------------
-[`afpj`, the Julia-equivalent library for `afp`](https://github.com/robertschnitman/afpj)  
+[`afpj`, the Julia-equivalent library of `afp`](https://github.com/robertschnitman/afpj)  
 [Advanced R by Hadley Wickham](http://adv-r.had.co.nz/Functionals.html)
 
 *End of Document*
