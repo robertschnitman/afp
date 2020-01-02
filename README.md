@@ -47,7 +47,7 @@ As such, `afp` exists to supplement the functionals in Base R,
 `purrr`, and others to support efficient and concise programming.
 
 The following sections provide examples for the primary functions:
-`do.bind()`, `mapreduce()`, and `telecast()`.
+`do.bind()`, `mapreduce()`, and `telecast()`. For a complete description of these and other functions within the packages, see the [*afp Handbook*](https://github.com/robertschnitman/afp/blob/master/docs/afp%20Handbook.pdf).
 
 ## 2. `do.bind()`
 --------------
@@ -206,6 +206,7 @@ on feasibility and future needs as appropriate.
 
 ## 6. References
 -------------
+[afp Handbook](https://github.com/robertschnitman/afp/blob/master/docs/afp%20Handbook.pdf)  
 [Julia programming language](https://julialang.org/)  
 [Julia - `broadcast()`](https://docs.julialang.org/en/v0.6.1/manual/arrays/#Broadcasting-1)  
 [Julia - `mapreduce()`](https://docs.julialang.org/en/v0.6.1/stdlib/collections/#Base.mapreduce-NTuple%7B4,Any%7D)  
