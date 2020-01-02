@@ -15,6 +15,8 @@ output:
 
 # `r n <- 1; n`. Introduction
 
+\pagenumbering{arabic} 
+
 The `afp` package--*Applied Functional Programming*--provides functionals to simplify iterative processes in R. The Base R `*apply()` family, [`purrr`](https://purrr.tidyverse.org/)[^2] library, and [Julia programming language](https://julialang.org/)[^3] are the principal influences. The former two contain tools essential for functional programming that minimize the need to incorporate loops and increase code brevity; however, there is inelegance with respect to specific situations.
 
 For example, to map a function and consequently bind rows or columns, `purrr` splits the decision into two functions rather than within one: `map_dfr()` and `map_dfc()`[^3], both of which only output to data frames (the former behaves the same as `map_df()`[^4])--while this feature is as intended, they nonetheless omit the possibility of a matrix when such a data type is preferred. Additionally, to reduce the results of a mapping, one must encase `Map()`/`lapply()` in `Reduce()`, while [Julia blends the routine into `mapreduce()`](https://docs.julialang.org/en/v0.6.1/stdlib/collections/#Base.mapreduce-NTuple%7B4,Any%7D)[^5].
