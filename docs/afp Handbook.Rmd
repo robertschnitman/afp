@@ -17,7 +17,7 @@ output:
 
 \pagenumbering{arabic} 
 
-The `afp` package--*Applied Functional Programming*--provides functionals to simplify iterative processes in R. The Base R `*apply()` family, [`purrr`](https://purrr.tidyverse.org/)[^2] library, and [Julia programming language](https://julialang.org/)[^3] are the principal influences. The former two contain tools essential for functional programming that minimize the need to incorporate loops and increase code brevity; however, there is inelegance with respect to specific situations.
+The `afp` package--*Applied Functional Programming*--provides functionals to simplify iterative processes in R. The Base R `*apply()` family, [`purrr`](https://purrr.tidyverse.org/)[^1] library, and [Julia programming language](https://julialang.org/)[^2] are the principal influences. The former two contain tools essential for functional programming that minimize the need to incorporate loops and increase code brevity; however, there is inelegance with respect to specific situations.
 
 For example, to map a function and consequently bind rows or columns, `purrr` splits the decision into two functions rather than within one: `map_dfr()` and `map_dfc()`[^3], both of which only output to data frames (the former behaves the same as `map_df()`[^4])--while this feature is as intended, they nonetheless omit the possibility of a matrix when such a data type is preferred. Additionally, to reduce the results of a mapping, one must encase `Map()`/`lapply()` in `Reduce()`, while [Julia blends the routine into `mapreduce()`](https://docs.julialang.org/en/v0.6.1/stdlib/collections/#Base.mapreduce-NTuple%7B4,Any%7D)[^5].
 
@@ -26,8 +26,8 @@ As such, `afp` exists to supplement the functionals in Base R,
 
 This handbook shows how to install `afp`, followed by descriptions of each function in the package before concluding.
 
-[^1]:https://julialang.org/
-[^2]:https://purrr.tidyverse.org/
+[^1]:https://purrr.tidyverse.org/
+[^2]:https://julialang.org/
 [^3]:https://purrr.tidyverse.org/reference/map.html
 [^4]:Type `purrr::map_df` in the console and compare with `purrr::map_dfr`.
 [^5]:https://docs.julialang.org/en/v0.6.1/stdlib/collections/#Base.mapreduce-NTuple%7B4,Any%7D
@@ -131,6 +131,9 @@ output2 <- do.bind(adhoc1, split1, 2) # == do.call(cbind, lapply(split1, adhoc1)
 
 ## Print the outputs.
 output1
+```
+\newpage
+```{r dobind1a}
 output2
 ```
 
@@ -141,7 +144,7 @@ knitr::kable(output1)
 knitr::kable(output2)
 ```
 
-[^7]:The naming of this function is to be consistent with the previously mentioned function.
+[^7]:The naming of `do.bind()` stems from `do.call()`.
 
 \newpage
 
@@ -204,10 +207,11 @@ mapdims(median, mtcars)
 
 ## `r n `a *mapc()* and *mapr()*
 
-To apply a function column-wise in R, `apply(x, 2, f)` can be called--for row-wise results, the margin input (i.e., the second input) can be set to 1. For situational convenience, the functions `mapc()` and `mapr()` achieve the same results.
+To apply a function column-wise in R, `apply(x, 2, f)` can be called--for row-wise results, the margin input (i.e., the second input) can be set to 1. For situational convenience, the functions `mapc()` and `mapr()` achieve the same results, respectively.
 
 The required inputs for these functions are `f` and `x`, respectively the function to execute and the dataset over which to perform the function. The output is an array (typically a vector or matrix, depending on the function being passed).
-.
+
+\newpage
 
 ### Example `r n`a.1. `mapc/r()`
 
@@ -289,7 +293,7 @@ head(mop(mtcars, 2, mean, `/`)) # == head(sweep(mtcars, 2, apply(mtcars, 2, mean
 
 ## `r n `a. *mop_div()*
 
-The function mop_div simplifies mop by operating only on columns and assuming f to be `/`.
+The function mop_div simplifies mop by operating only on columns and assuming f to be the division operator.
 
 Only two parameters are reuqired: the collection `x` and summary statistic function `s`. The output is similar to that of `mop()`.
 
