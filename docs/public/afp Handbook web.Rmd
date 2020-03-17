@@ -1,0 +1,435 @@
+---
+documentclass: book
+title:  Handbook for the afp (Applied Functional Programming) R Package
+author: "Robert Schnitman"
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+biblio-style: apalike
+link-citations: yes
+description: "The purpose of the afp--Applied Functional Programming--R package is to provide functionals to simplify iterative processes."
+---
+
+# Introduction
+
+The `afp` package--*Applied Functional Programming*--provides functionals to simplify iterative processes in R. The Base R `*apply()` family, [`purrr`](https://purrr.tidyverse.org/)[^1] library, and [Julia programming language](https://julialang.org/)[^2] are the principal influences. The former two contain tools essential for functional programming that minimize the need to incorporate loops and increase code brevity; however, there is inelegance with respect to specific situations.
+
+For example, to map a function and consequently bind rows or columns, `purrr` splits the decision into two functions rather than within one: `map_dfr()` and `map_dfc()`[^3], both of which only output to data frames (the former behaves the same as `map_df()`[^4])--while this feature is as intended, they nonetheless omit the possibility of a matrix when such a data type is preferred. Additionally, to reduce the results of a mapping, one must encase `Map()`/`lapply()` in `Reduce()`, while [Julia blends the routine into `mapreduce()`](https://docs.julialang.org/en/v0.6.1/stdlib/collections/#Base.mapreduce-NTuple%7B4,Any%7D)[^5].
+
+As such, `afp` exists to supplement the functionals in Base R,
+`purrr`, and others to support efficient and concise programming.
+
+This handbook shows how to install `afp`, followed by descriptions of each function in the package before concluding.
+
+[^1]:https://purrr.tidyverse.org/
+[^2]:https://julialang.org/
+[^3]:https://purrr.tidyverse.org/reference/map.html
+[^4]:Type `purrr::map_df` in the console and compare with `purrr::map_dfr`.
+[^5]:https://docs.julialang.org/en/v0.6.1/stdlib/collections/#Base.mapreduce-NTuple%7B4,Any%7D
+
+# Installing *afp*
+
+The library `afp` currently is only installable via GitHub and is contingent on R versions at or above 3.5. To install the package, first install `devtools` so that you may make use of the function `install_github`, referencing `afp` by the package creator's username ("robertschnitman") followed by "/afp" as shown in the code below:
+
+```{r install1, eval = FALSE}
+## afp dependency: R >= 3.5
+
+install.packages("devtools") # Install library necessary for installing afp.
+
+devtools::install_github("robertschnitman/afp") # Install afp.
+```
+
+The following sections will assume that you have loaded this library, so please load it so that the codes in the mentioned sections will be executable for you.
+
+```{r install2}
+library(afp)
+```
+
+# *agg()*
+
+The function `agg()` mimics Base R's `aggregate()` with the exception that an unnested data frame is maintained when calling multiple functions in a vector.
+
+To demonstrate, let's compare the structure between the two functions.
+
+### `aggregate()` vs. `agg()`
+```{r agg1}
+### GOAL: Compare the output between aggregate vs. agg() when 
+###       calling multiple functions within a vector.
+
+ms   <- function(x) c(m = mean(x), s = sd(x))
+form <- formula(cbind(mpg, disp) ~ am + gear)
+
+A <- aggregate(form, mtcars, ms)
+B <- agg(form, mtcars, ms)       
+
+str(A) # Nested results
+str(B) # Unnested results
+```
+
+As a result, `aggregate` nests the output into the dependent variables, whereas `agg()` "flattens" the output. The benefit of flattening is that the user can refer to these specific columns more directly than having to call the nested information. In other words, to refer to the mean MPG vector in our example with `aggregate()`, you would have to execute `A$mpg[, 'm']`, whereas in `agg()` it is simply `B$mpg.m`. As such, `agg()` can be more efficient than its counterpart.
+
+# *bcast()*
+
+Inspired by the dot syntax from Julia's `broadcast()` function[^6], `bcast()`/`.()` allows the user to execute `mapply()` with a convenient shorthand.
+
+The function has two required inputs and two optional ones. The required arguments are `f`, the function to call, and `x`, the first argument over which to vectorize. The optional arguments are `...`, which is a list of additional arguments to the function, and `simplify`, which defaults to `FALSE` to maintain a list type in the output--when to set to `TRUE`, the output is an array (typically a matrix a la\` the `mapply()` function).
+
+### Broadcasting with `bcast()`
+
+```{r bcast1}
+# GOAL: Operate across multiple matrices.
+
+a <- matrix(1:9, 3, 3)
+b <- 20:22
+c <- matrix(rnorm(9), 3)
+
+bcast(`/`, a, b, simplify = TRUE)   # matrix.
+
+bcast(`/`, a, b, c, simplify = TRUE)[1:3] # list occurs when lengths do not match.
+```
+
+[^6]:https://docs.julialang.org/en/v0.6.1/manual/arrays/#Broadcasting-1
+
+# *do.bind()*
+
+When executing `lapply()` to manipulate subsets of data, calling `rbind()` or `cbind()` within `do.call()` is common to fuse the transformed partitions. While the implementation is possible on one line by way of the `do.call(*bind, lapply(x, f))` form, the readability and intended concision decreases as the complexity of the anonymous function increases. Even if the `lapply()` portion is stored in an object before hand, the intention of `do.call()` is not clear until `*bind` is stated. To minimize these issues, `do.bind()`[^7] wraps this process and clarifies its purpose: *bind the results of the given function*.
+
+One may obtain similar results with `map_dfr()`/`map_dfc()` from `purrr`; but the output would always result in a data frame rather than the possibility of a matrix. Additionally, the binding rows or columns must be done in different functions, whereas it can be defined within `do.bind()`.
+
+There are three required parameters in this function: `f`, `x`, and `m`--respectively the function, collection (e.g. data frame), and margin (rbind/cbind designation). If `m = 1` (the default), the results are combined row-wise; `2` for column-wise. A fourth parameter `...` passes to `do.call()`. The output is a matrix or dataframe, depending on the inputs being passed.
+
+This function can be useful for storing coefficients from multiple models into a single matrix.
+
+### Coefficient Matrix
+```{r dobind1}
+# GOAL: Create a matrix of coefficients stemming from 3 models.
+
+## Split mtcars by gear
+split1  <- split(mtcars, mtcars$gear) 
+
+## Create a function that excecutes a model for each subset and obtains the coefficients.
+adhoc1  <- function(s) {
+  
+  coef(lm(mpg ~ disp + wt + am, s))   
+  
+}
+
+## Execute the ad-hoc function for each subset.
+output1 <- do.bind(adhoc1, split1, 1) # == do.call(rbind, lapply(split1, adhoc1)).
+output2 <- do.bind(adhoc1, split1, 2) # == do.call(cbind, lapply(split1, adhoc1)).
+
+## Print the outputs.
+output1
+```
+
+```{r dobind1a}
+output2
+```
+
+The outputs above fit well into `kable()` from the `knitr` package:
+
+```{r dobind1b, results = 'asis'}
+knitr::kable(output1)
+knitr::kable(output2)
+```
+
+[^7]:The naming of `do.bind()` stems from `do.call()`.
+
+# *mapchr()*
+
+`mapchr()` is a general functional for altering character vectors: it applies any function to each of its elements. Similar to `map_chr()` from the `purrr` library with the exception that `mapchr()` only accepts character vectors as the data input. This function is useful for when manipulating the arrangement of the characters is desired. 
+
+The required inputs are `f` and `x`, respectively the function and character vector. The output is typically a character vector (depending on the function being passed).
+
+### Collapsing
+```{r mapchr1}
+rn_mc <- rownames(mtcars)
+mapchr(function(x) paste0(x, collapse = '|'), rn_mc)
+```
+
+## *is.lower()* and *is.upper()*
+
+The functions `is.upper()` and `is.lower()` test whether each element in a string vector is all uppercase or lowercase, respectively. The required input for both functions is a character vector. The output is a Boolean vector. These functions are useful for pattern matching acronyms, uppercase, and lowercase elements.
+
+### Testing whether an element is all uppercase or lowercase.
+```{r islu1}
+chr <- c('TEST', 'test', 'tEsT')
+is.upper(chr)
+is.lower(chr)
+```
+
+## *jumble()*
+
+The function `jumble(x)` randomly changes the order of the characters in every element. The input and output is a character vector. This function can be useful for generating variations of existing passwords or other types of string vectors.
+
+### Jumbling characters
+```{r jumble1}
+set.seed(0)
+rn_mc <- rownames(mtcars)
+jumble(rn_mc)
+```
+
+## *reverse()*
+
+The function `reverse()` reverses the order of characters for each element. The input and output is a character vector. This function can be useful for decoding reversed strings.
+
+### Reversing every element's order.
+```{r reverse1}
+rn_mc <- rownames(mtcars)
+reverse(rn_mc)
+```
+
+# *mapdims()*
+
+The function `mapdims()` calls `apply()` to map over a dataset's dimensions, saving the column- and row-wise results separately in a list.
+
+The required inputs for these functions are `f` and `x`, respectively the function to execute and the dataset over which to perform the function. The output is a list of arrays (typically a vector or matrix, depending on the function being passed).
+
+### Mapping dimensions
+```{r mapdims1}
+mapdims(median, mtcars)
+```
+
+## *mapc()* and *mapr()*
+
+To apply a function column-wise in R, `apply(x, 2, f)` can be called--for row-wise results, the margin input (i.e., the second input) can be set to 1. For situational convenience, the functions `mapc()` and `mapr()` achieve the same results, respectively.
+
+The required inputs for these functions are `f` and `x`, respectively the function to execute and the dataset over which to perform the function. The output is an array (typically a vector or matrix, depending on the function being passed).
+
+### `mapc/r()`
+
+```{r mapcr1}
+mapc(median, mtcars) # Column-wise results
+mapr(median, mtcars) # Row-wise results.
+```
+
+# *mapreduce()*
+
+Base R has functionals that output a list by way of `lapply()` and `Map()` (among others), while `Reduce()` diminishes given elements in a consecutive manner until a single result remains. While these functions are relatively straightforward to combine (depending on the functions being passed), R does not inherently possess a singular function to accomplish this operation [unlike Julia with `mapreduce()`](https://docs.julialang.org/en/v0.6.1/stdlib/collections/#Base.mapreduce-NTuple%7B4,Any%7D)[^8]. Therefore, `mapreduce()` in `afp` offers a simplified Julia-equivalent to streamline the intended procedure in R.
+
+The three required parameters are `f`, `o`, and `x` ("fox,"
+collectively)--function, (binary) operator, and collection (e.g. matrix). If `f` is multivariate, the fourth parameter `y` can take multiple arguments much like `MoreArgs` in `mapply()`. The final parameter `...` passes to `Reduce()`. The output is typically a matrix, depending on the inputs and functions being passed.
+
+### Map and Reduce
+
+```{r mapreduce1}
+# GOAL: Map a function to each matrix and then reduce them by a binary operator.
+
+matrixl <- list(A = matrix(c(1:9), 3, 3), 
+                B = matrix(10:18, 3, 3), 
+                C = matrix(19:27, 3, 3))
+
+## Univariate case
+output1 <- mapreduce(function(x) x^2 + 1, `/`, matrixl) 
+
+output1 ## == Reduce(`/`, Map(function(x) x^2 + 1, matrixl))
+
+## Multivariate case
+output2 <- with(matrixl, 
+                mapreduce(function(i, j, k) i*j - k, 
+                          `/`, 
+                          A, 
+                          list(B, C)))
+
+output2
+```
+
+
+[^8]:https://docs.julialang.org/en/v0.6.1/stdlib/collections/#Base.mapreduce-NTuple%7B4,Any%7D
+
+## *mrchop()*
+
+The function `mrchop()` has similar properties to `mapreduce()`: it applies the latter row-wise or column-wise, which can be specified.
+
+The four required parameters are `f`, `o`, `x`, and `m`--function, (binary) operator, collection (e.g. matrix), and margin (either 1 for row-wise or 2 for column-wise). The fifth, optional parameter `...` passes to `mapreduce()`, which passes to `Reduce()`. The output is typically a matrix, depending on the inputs and functions being passed.
+
+### Map and Reduce Column/Row-wise
+```{r mrchop1}
+mrchop(function(x) x/2, `+`, mtcars, 1) # Row-wise
+mrchop(function(x) x/2, `+`, mtcars, 2) # Column-wise
+```
+
+## *reducechop()*
+
+The function `reducechop()` has similar properties to `mrchop()`: it applies `Reduce()` row-wise or column-wise, which can be specified.
+
+### Reduce Column/Row-wise
+```{r reducechop1}
+reducechop(`+`, mtcars, 1) # Row-wise. Equivalent to Reduce(`+`, mtcars). 
+reducechop(`+`, mtcars, 2) # Column-wise (default).
+```
+
+# *mop()*
+
+Essentially, mop is a wrapper for sweep(x, MARGIN, apply(...), FUN). This function is useful for indexing variables by their means, for example, so that the magnitude of a value relative to its average is known.
+
+The four required arguments are `x`, `m`, `s`, and `f`--the collection (e.g. matrix), margin (1 for row-wise or 2 for column-wise), summary statistic function, and binary opertaor function, respectively. A fifth, optional argument `...` passes to `sweep()`. The output is typically a matrix or dataframe, depending on the inputs and functions being passed.
+
+### Mopping a Dataframe
+```{r mop1}
+head(mop(mtcars, 2, mean, `/`)) # == head(sweep(mtcars, 2, apply(mtcars, 2, mean), `/`))
+```
+
+## *mop_div()*
+
+The function mop_div simplifies mop by operating only on columns and assuming f to be the division operator.
+
+Only two parameters are reuqired: the collection `x` and summary statistic function `s`. The output is similar to that of `mop()`.
+
+### Indexing a Dataframe
+```{r mop_div1}
+head(mop_div(mtcars, mean))
+```
+
+## *smop()*
+
+The function `smop()` simplifies `mop()` by operating only on columns--this is more general than `mop_div()` in which it operates on columns and only uses the division binary operator.
+
+The three required inputs are the collection `x`, summary statistic function `s`, and binary operator function `f`. A fourth, optional input `...` passes to `mop()`, which passes to `sweep()`.
+
+### Indexing a Dataframe, Part 2
+```{r smop1}
+head(smop(mtcars, mean, `/`))
+```
+
+# *mtapply()*
+
+Being a multivariate version of `tapply()`, `mtapply` applies a function over an array by a list of indices.
+
+The two required inputs are the object `X` and list of indices `INDEX`. The optional inputs are the function to apply `FUN` and `...`, which passses to `mapply`. For the first three inputs, see the documentation for `tapply()`[^9] for more information; for the fourth, see `mapply()`[^10]. The output is typically a list of vectors or matrices, depending on the inputs and funciton being passed.
+
+### Multivariate `tapply()`
+```{r mtapply1}
+A <- mtcars[, c('mpg', 'wt', 'disp')]  # Targets.
+B <- mtcars[, c('gear', 'am', 'carb')] # Indices.
+
+mtapply(A, B, mean) # Output
+```
+
+[^9]:https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/tapply
+[^10]:https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/mapply
+
+# *pairbind()* and *pairbind_df()*
+
+The function `pairbind()` appends two datasets' rows in a pairwise fashion. In other words, it appends the 1st row of the first dataset with the 1st row of the second dataset, the 2nd row of the first with the 2nd row of the second, and so on. This function can be useful for kable-friendly frequency distribution tables.
+
+The two required inputs are `x` and `y`, each being a 2D object (e.g. dataframe, matrix, etc). The output is a matrix.
+
+The function `pairbind_df()` accomplishes the same as `pairbind()` except that the output is a data frame.
+
+### Creating a kable-friendly Frequency Distribution Table
+
+```{r pb1, message = FALSE}
+library(tidyverse) # For Data management 
+library(magrittr)  # For the update assignment pipe operator %<>%
+library(knitr)     # For kable().
+library(kableExtra)# For other kable functions.
+
+# Frequencies
+freq_df <- with(diamonds, table(color, clarity)) %>%
+  as.data.frame() %>%
+  spread(NCOL(.) - 1, NCOL(.)) %>%
+  mutate(Total = apply(.[, 2:NCOL(.)], 1, sum))
+
+# Percentages
+ prop_df <- freq_df 
+ prop_df[, 2:NCOL(prop_df)] <- prop_df[, 2:NCOL(prop_df)]/prop_df$Total
+ prop_df[, 2:NCOL(prop_df)] %<>% 
+   map_df(~ paste0(round(.x*100), '%'))
+  freq_df %<>% 
+  format(., big.mark = ',', scientific = FALSE) %>%
+  map_df(as.character)
+
+# Output
+prop_df %<>% map_df(as.character)
+
+pb <- pairbind_df(freq_df, prop_df)
+
+pb %>%
+  kable(booktabs = TRUE) %>%
+  kable_styling(full_width = TRUE) %>%
+  collapse_rows(1, valign = 'top', latex_hline = 'major')
+```
+
+# *telecast()*
+
+`Map()`/`mapply()` from Base R executes functions pairwise when given multiple data objects, as do `map2()`/`pmap()` from `purrr`. While beneficial in their own right, said functions cannot concisely map over datasets *independently* of each other, which would be useful for storing disparate information into a single list.
+
+Inspired by [`broadcast()` from Julia](https://docs.julialang.org/en/v0.6.1/manual/arrays/#Broadcasting-1)[^11], `telecast()` essentially wraps `mapply()` within `lapply()` to achieve this outcome.
+
+The two required functions are `f` and `l`, respectively a function and list. The third parameter `as.vector`, which is optional, converts the output to a vector if set to `TRUE` (and thus will resemble the output from `rapply()`); by default, it is `FALSE` for a list format.
+
+### Iterative Means
+```{r telecast1}
+# GOAL: Obtain the means for each column in 3 datasets.
+
+### Create a list of 3 datasets independent of each other.
+l <- list(mc = mtcars, aq = airquality, lcs = LifeCycleSavings)
+
+### Create a function that removes missing values from calculating the average.
+mean.nr <- function(x) mean(x, na.rm = TRUE) # airquality has NA values.
+
+### Get the means for every column column in each dataset.
+output1 <- telecast(mean.nr, l) 
+
+output1 # Compare: lapply(l, function(x) mapply(mean.nr, x))
+```
+
+[^11]:https://docs.julialang.org/en/v0.6.1/manual/arrays/#Broadcasting-1
+
+## *chain()*
+
+The function `chain()` is a simplification of `telecast()`: the output is a matrix via `sapply()`.
+
+### Chaining Means into a Bar Plot
+```{r chain1, fig.height = 9, fig.width = 7}
+# GOAL 1: Get means for every column in mtcars by cylinder.
+
+l      <- split(mtcars, mtcars$cyl) 
+output <- chain(mean, l)
+output
+
+all(chain(mean, l) == t(sapply(l, function(z) sapply(z, mean))))
+
+# GOAL 2: Plot the means
+par (mfrow = c(4, 3))
+
+for (i in 1:NCOL(output)) {
+
+  barplot(output[, i], 
+          col  = 'cyan3', 
+          xlab = 'Number of Cylinders', 
+          ylab = paste('Mean', colnames(output)[i]))
+
+}
+```
+
+# Conclusion {-}
+
+The functions discussed and demonstrated will be improved on a continuous basis to (1) minimize repetitive iterative processing and (2) emphasize code efficiency and brevity.
+
+# References {-}
+
+Julia programming language. https://julialang.org/
+
+Julia - `broadcast()`. https://docs.julialang.org/en/v0.6.1/manual/arrays/#Broadcasting-1
+
+Julia - `mapreduce()`. https://docs.julialang.org/en/v0.6.1/stdlib/collections/#Base.mapreduce-NTuple%7B4,Any%7D
+
+R Documentation. `tapply()`. https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/tapply
+
+R Documentation. `mapply()`. https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/mapply
+
+Tidyverse - `purrr`. https://purrr.tidyverse.org/
+
+# See also {-}
+
+`afp` GitHub Page. https://github.com/robertschnitman/afp 
+
+`afpj`, a Julia-equivalent library of `afp`. https://github.com/robertschnitman/afpj 
+
+Wickham, Hadley. *Advanced R*, *Functionals* chapter. http://adv-r.had.co.nz/Functionals.html
+
+# Index {-}
+
+TBD

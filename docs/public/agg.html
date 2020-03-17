@@ -24,7 +24,7 @@
 <meta name="author" content="Robert Schnitman" />
 
 
-<meta name="date" content="2020-03-16" />
+<meta name="date" content="2020-03-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -134,7 +134,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="installing-afp.html"><a href="installing-afp.html"><i class="fa fa-check"></i><b>2</b> Installing <em>afp</em></a></li>
 <li class="chapter" data-level="3" data-path="agg.html"><a href="agg.html"><i class="fa fa-check"></i><b>3</b> <em>agg()</em></a>
 <ul>
-<li class="chapter" data-level="3.0.1" data-path="agg.html"><a href="agg.html#aggregatevs.agg"><i class="fa fa-check"></i><b>3.0.1</b> aggregate()<code>vs.</code>agg()`</a></li>
+<li class="chapter" data-level="3.0.1" data-path="agg.html"><a href="agg.html#aggregate-vs.-agg"><i class="fa fa-check"></i><b>3.0.1</b> <code>aggregate()</code> vs. <code>agg()</code></a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="bcast.html"><a href="bcast.html"><i class="fa fa-check"></i><b>4</b> <em>bcast()</em></a>
 <ul>
@@ -233,8 +233,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">3</span> <em>agg()</em></h1>
 <p>The function <code>agg()</code> mimics Base R’s <code>aggregate()</code> with the exception that an unnested data frame is maintained when calling multiple functions in a vector.</p>
 <p>To demonstrate, let’s compare the structure between the two functions.</p>
-<div id="aggregatevs.agg" class="section level3" number="3.0.1">
-<h3><span class="header-section-number">3.0.1</span> aggregate()<code>vs.</code>agg()`</h3>
+<div id="aggregate-vs.-agg" class="section level3" number="3.0.1">
+<h3><span class="header-section-number">3.0.1</span> <code>aggregate()</code> vs. <code>agg()</code></h3>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="agg.html#cb3-1"></a><span class="co">### GOAL: Compare the output between aggregate vs. agg() when </span></span>
 <span id="cb3-2"><a href="agg.html#cb3-2"></a><span class="co">###       calling multiple functions within a vector.</span></span>
 <span id="cb3-3"><a href="agg.html#cb3-3"></a></span>
