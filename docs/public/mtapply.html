@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>10 mtapply() | Handbook for the afp (Applied Functional Programming) R Package</title>
+  <meta name="description" content="The purpose of the afp–Applied Functional Programming–R package is to provide functionals to simplify iterative processes." />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="10 mtapply() | Handbook for the afp (Applied Functional Programming) R Package" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="The purpose of the afp–Applied Functional Programming–R package is to provide functionals to simplify iterative processes." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="10 mtapply() | Handbook for the afp (Applied Functional Programming) R Package" />
+  
+  <meta name="twitter:description" content="The purpose of the afp–Applied Functional Programming–R package is to provide functionals to simplify iterative processes." />
+  
+
+<meta name="author" content="Robert Schnitman" />
+
+
+<meta name="date" content="2020-03-16" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="mop.html"/>
+<link rel="next" href="pairbind-and-pairbind-df.html"/>
+<script src="libs/header-attrs-2.1/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="installing-afp.html"><a href="installing-afp.html"><i class="fa fa-check"></i><b>2</b> Installing <em>afp</em></a></li>
+<li class="chapter" data-level="3" data-path="agg.html"><a href="agg.html"><i class="fa fa-check"></i><b>3</b> <em>agg()</em></a>
+<ul>
+<li class="chapter" data-level="3.0.1" data-path="agg.html"><a href="agg.html#aggregatevs.agg"><i class="fa fa-check"></i><b>3.0.1</b> aggregate()<code>vs.</code>agg()`</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="bcast.html"><a href="bcast.html"><i class="fa fa-check"></i><b>4</b> <em>bcast()</em></a>
+<ul>
+<li class="chapter" data-level="4.0.1" data-path="bcast.html"><a href="bcast.html#broadcasting-with-bcast"><i class="fa fa-check"></i><b>4.0.1</b> Broadcasting with <code>bcast()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="do-bind.html"><a href="do-bind.html"><i class="fa fa-check"></i><b>5</b> <em>do.bind()</em></a>
+<ul>
+<li class="chapter" data-level="5.0.1" data-path="do-bind.html"><a href="do-bind.html#coefficient-matrix"><i class="fa fa-check"></i><b>5.0.1</b> Coefficient Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="mapchr.html"><a href="mapchr.html"><i class="fa fa-check"></i><b>6</b> <em>mapchr()</em></a>
+<ul>
+<li class="chapter" data-level="6.0.1" data-path="mapchr.html"><a href="mapchr.html#collapsing"><i class="fa fa-check"></i><b>6.0.1</b> Collapsing</a></li>
+<li class="chapter" data-level="6.1" data-path="mapchr.html"><a href="mapchr.html#is.lower-and-is.upper"><i class="fa fa-check"></i><b>6.1</b> <em>is.lower()</em> and <em>is.upper()</em></a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="mapchr.html"><a href="mapchr.html#testing-whether-an-element-is-all-uppercase-or-lowercase."><i class="fa fa-check"></i><b>6.1.1</b> Testing whether an element is all uppercase or lowercase.</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="mapchr.html"><a href="mapchr.html#jumble"><i class="fa fa-check"></i><b>6.2</b> <em>jumble()</em></a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="mapchr.html"><a href="mapchr.html#jumbling-characters"><i class="fa fa-check"></i><b>6.2.1</b> Jumbling characters</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="mapchr.html"><a href="mapchr.html#reverse"><i class="fa fa-check"></i><b>6.3</b> <em>reverse()</em></a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="mapchr.html"><a href="mapchr.html#reversing-every-elements-order."><i class="fa fa-check"></i><b>6.3.1</b> Reversing every element’s order.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="mapdims.html"><a href="mapdims.html"><i class="fa fa-check"></i><b>7</b> <em>mapdims()</em></a>
+<ul>
+<li class="chapter" data-level="7.0.1" data-path="mapdims.html"><a href="mapdims.html#mapping-dimensions"><i class="fa fa-check"></i><b>7.0.1</b> Mapping dimensions</a></li>
+<li class="chapter" data-level="7.1" data-path="mapdims.html"><a href="mapdims.html#mapc-and-mapr"><i class="fa fa-check"></i><b>7.1</b> <em>mapc()</em> and <em>mapr()</em></a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="mapdims.html"><a href="mapdims.html#mapcr"><i class="fa fa-check"></i><b>7.1.1</b> <code>mapc/r()</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="mapreduce.html"><a href="mapreduce.html"><i class="fa fa-check"></i><b>8</b> <em>mapreduce()</em></a>
+<ul>
+<li class="chapter" data-level="8.0.1" data-path="mapreduce.html"><a href="mapreduce.html#map-and-reduce"><i class="fa fa-check"></i><b>8.0.1</b> Map and Reduce</a></li>
+<li class="chapter" data-level="8.1" data-path="mapreduce.html"><a href="mapreduce.html#mrchop"><i class="fa fa-check"></i><b>8.1</b> <em>mrchop()</em></a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="mapreduce.html"><a href="mapreduce.html#map-and-reduce-columnrow-wise"><i class="fa fa-check"></i><b>8.1.1</b> Map and Reduce Column/Row-wise</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="mapreduce.html"><a href="mapreduce.html#reducechop"><i class="fa fa-check"></i><b>8.2</b> <em>reducechop()</em></a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="mapreduce.html"><a href="mapreduce.html#reduce-columnrow-wise"><i class="fa fa-check"></i><b>8.2.1</b> Reduce Column/Row-wise</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="mop.html"><a href="mop.html"><i class="fa fa-check"></i><b>9</b> <em>mop()</em></a>
+<ul>
+<li class="chapter" data-level="9.0.1" data-path="mop.html"><a href="mop.html#mopping-a-dataframe"><i class="fa fa-check"></i><b>9.0.1</b> Mopping a Dataframe</a></li>
+<li class="chapter" data-level="9.1" data-path="mop.html"><a href="mop.html#mop_div"><i class="fa fa-check"></i><b>9.1</b> <em>mop_div()</em></a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="mop.html"><a href="mop.html#indexing-a-dataframe"><i class="fa fa-check"></i><b>9.1.1</b> Indexing a Dataframe</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="mop.html"><a href="mop.html#smop"><i class="fa fa-check"></i><b>9.2</b> <em>smop()</em></a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="mop.html"><a href="mop.html#indexing-a-dataframe-part-2"><i class="fa fa-check"></i><b>9.2.1</b> Indexing a Dataframe, Part 2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="mtapply.html"><a href="mtapply.html"><i class="fa fa-check"></i><b>10</b> <em>mtapply()</em></a>
+<ul>
+<li class="chapter" data-level="10.0.1" data-path="mtapply.html"><a href="mtapply.html#multivariate-tapply"><i class="fa fa-check"></i><b>10.0.1</b> Multivariate <code>tapply()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="pairbind-and-pairbind-df.html"><a href="pairbind-and-pairbind-df.html"><i class="fa fa-check"></i><b>11</b> <em>pairbind()</em> and <em>pairbind_df()</em></a>
+<ul>
+<li class="chapter" data-level="11.0.1" data-path="pairbind-and-pairbind-df.html"><a href="pairbind-and-pairbind-df.html#creating-a-kable-friendly-frequency-distribution-table"><i class="fa fa-check"></i><b>11.0.1</b> Creating a kable-friendly Frequency Distribution Table</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="telecast.html"><a href="telecast.html"><i class="fa fa-check"></i><b>12</b> <em>telecast()</em></a>
+<ul>
+<li class="chapter" data-level="12.0.1" data-path="telecast.html"><a href="telecast.html#iterative-means"><i class="fa fa-check"></i><b>12.0.1</b> Iterative Means</a></li>
+<li class="chapter" data-level="12.1" data-path="telecast.html"><a href="telecast.html#chain"><i class="fa fa-check"></i><b>12.1</b> <em>chain()</em></a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="telecast.html"><a href="telecast.html#chaining-means-into-a-bar-plot"><i class="fa fa-check"></i><b>12.1.1</b> Chaining Means into a Bar Plot</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i>Conclusion</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="" data-path="see-also.html"><a href="see-also.html"><i class="fa fa-check"></i>See also</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Handbook for the afp (Applied Functional Programming) R Package</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="mtapply" class="section level1" number="10">
+<h1><span class="header-section-number">10</span> <em>mtapply()</em></h1>
+<p>Being a multivariate version of <code>tapply()</code>, <code>mtapply</code> applies a function over an array by a list of indices.</p>
+<p>The two required inputs are the object <code>X</code> and list of indices <code>INDEX</code>. The optional inputs are the function to apply <code>FUN</code> and <code>...</code>, which passses to <code>mapply</code>. For the first three inputs, see the documentation for <code>tapply()</code><a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a> for more information; for the fourth, see <code>mapply()</code><a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a>. The output is typically a list of vectors or matrices, depending on the inputs and funciton being passed.</p>
+<div id="multivariate-tapply" class="section level3" number="10.0.1">
+<h3><span class="header-section-number">10.0.1</span> Multivariate <code>tapply()</code></h3>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="mtapply.html#cb52-1"></a>A &lt;-<span class="st"> </span>mtcars[, <span class="kw">c</span>(<span class="st">&#39;mpg&#39;</span>, <span class="st">&#39;wt&#39;</span>, <span class="st">&#39;disp&#39;</span>)]  <span class="co"># Targets.</span></span>
+<span id="cb52-2"><a href="mtapply.html#cb52-2"></a>B &lt;-<span class="st"> </span>mtcars[, <span class="kw">c</span>(<span class="st">&#39;gear&#39;</span>, <span class="st">&#39;am&#39;</span>, <span class="st">&#39;carb&#39;</span>)] <span class="co"># Indices.</span></span>
+<span id="cb52-3"><a href="mtapply.html#cb52-3"></a></span>
+<span id="cb52-4"><a href="mtapply.html#cb52-4"></a><span class="kw">mtapply</span>(A, B, mean) <span class="co"># Output</span></span></code></pre></div>
+<pre><code>## $mpg_by_gear
+##        3        4        5 
+## 16.10667 24.53333 21.38000 
+## 
+## $wt_by_am
+##        0        1 
+## 3.768895 2.411000 
+## 
+## $disp_by_carb
+##        1        2        3        4        6        8 
+## 134.2714 208.1600 275.8000 308.8200 145.0000 301.0000</code></pre>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="9">
+<li id="fn9"><p><a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/tapply" class="uri">https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/tapply</a><a href="mtapply.html#fnref9" class="footnote-back">↩︎</a></p></li>
+<li id="fn10"><p><a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/mapply" class="uri">https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/mapply</a><a href="mtapply.html#fnref10" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="mop.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pairbind-and-pairbind-df.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+</body>
+
+</html>
