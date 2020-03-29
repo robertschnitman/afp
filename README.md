@@ -47,7 +47,7 @@ As such, `afp` exists to supplement the functionals in Base R,
 `purrr`, and others to support efficient and concise programming.
 
 The following sections provide examples for the primary functions:
-`do.bind()`, `mapreduce()`, and `telecast()`. For a complete description of these and other functions within the packages, see the [*afp Handbook*](https://github.com/robertschnitman/afp/blob/master/docs/afp%20Handbook.pdf).
+`do.bind()`, `mapreduce()`, and `telecast()`. For a complete description of these and other functions within the packages, see the [*afp Handbook*](https://github.com/robertschnitman/afp/blob/master/docs/afp-Handbook-v2.pdf).
 
 ## 2. `do.bind()`
 --------------
