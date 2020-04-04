@@ -1,0 +1,130 @@
+---
+title: "afp"
+author: "Robert Schnitman"
+date: "June 23, 2018"
+output: html_document
+---
+***Robert Schnitman***  
+***2018-06-23***  
+**Recommended Citation:**  
+  **Schnitman, Robert (2018). afp v0.0.0.1. https://github.com/robertschnitman/afp **
+
+```{r setup, include=FALSE}
+pkg_names <- c('do.bind', 'mapreduce', 'telecast')
+pkg_paths <- paste0('r/', pkg_names, '.r')
+
+invisible(lapply(pkg_paths, source)) # load packages.
+```
+
+## Outline
+0. Installation
+1. Introduction
+2. `do.bind()`
+3. `mapreduce()`
+4. `telecast()`
+5. Conclusion
+
+## 0. Installation
+```{r s0, eval = FALSE}
+## Dependencies: R >= 3.5
+
+# install.packages("devtools")
+devtools::install_github("robertschnitman/afp")
+
+```
+
+## 1. Introduction
+
+The `afp` package--*Applied Functional Programming*--provides functionals to simplify iterative processes in R. The Base R `*apply()` family, `purrr` library, and [Julia programming language](https://julialang.org/) are the principal influences. The former two contain tools essential for functional programming that minimize the need to incorporate loops and increase code brevity; however, there is inelegance with respect to specific situations. 
+
+For example, to map a function and consequently bind rows or columns, `purrr` splits the decision into two functions rather than within one: `map_dfr()` and `map_dfc()`, both of which only output to data frames--while this feature is as intended, they nonetheless omit the possibility of a matrix when such a data type is preferred. Additionally, to reduce the results of a mapping, one must encase `Map()`/`lapply()` in `Reduce()`, while [Julia blends the routine into `mapreduce()`](https://docs.julialang.org/en/v0.6.1/stdlib/collections/#Base.mapreduce-NTuple{4,Any}).
+
+As such, `afp` exists to supplement the functionals in Base R, `purrr`, and others to support efficient and concise programming.
+
+The following sections provide examples for the primary functions: `do.bind()`, `mapreduce()`, and `telecast()`.
+
+## 2. `do.bind()`
+
+When executing `lapply()` to manipulate subsets of data, calling `rbind()` or `cbind()` within `do.call()` is common to fuse the transformed partitions. While the implementation is possible on one line by way of the `do.call(*bind, lapply(x, f))` form, the readability and intended concision decreases as the complexity of the anonymous function increases. Even if the `lapply()` portion is stored in an object before hand, the intention of `do.call()` is not clear until `*bind` is stated. To minimize these issues, `do.bind()` wraps this process and clarifies its purpose: *bind the results of the given function*.
+
+One may obtain similar results with `map_dfr()`/`map_dfc()` from `purrr`; but the output would always result in a data frame rather than the possibility of a matrix. Additionally, the binding rows or columns must be done in different functions, whereas it can be defined within `do.bind()`.
+
+There are three required parameters in this function: `f`, `x`, and `m`--respectively the function, collection (e.g. data frame), and margin (rbind/cbind designation). If `m = 1` (the default), the results are combined row-wise; `2` for column-wise. A fourth parameter `...` passes to `do.call()`. 
+
+To note, the naming of this function is to be consistent with the previously mentioned function.
+
+### EXAMPLE - `do.bind()` \#1: Store subset-contingent lm() coefficients in a matrix.
+```{r s2-1}
+split1  <- split(mtcars, mtcars$gear)
+adhoc1  <- function(s) {coef(lm(mpg ~ disp + wt + am, s))}
+output1 <- do.bind(adhoc1, split1) # == do.call(rbind, lapply(split1, adhoc1)).
+output1                            # Rownames indicate subset.
+
+```
+
+### EXAMPLE - `do.bind()` \#2: Compute the median ozone-temperature ratio for each given month.
+```{r s2-2}
+airquality2 <- na.omit(airquality) # NA values exist in airquality.
+split2      <- split(airquality2, airquality2$Month)
+adhoc2      <- function(x, y) {median(x/y)}
+output2     <- do.bind(function(s) with(s, adhoc2(Ozone, Temp)), split2, 2) 
+output2 # == do.call(cbind, lapply(split2, function(s) with(s, adhoc2(Ozone, Temp))))
+
+```
+
+## 3. `mapreduce()`
+
+Base R has functionals that output a list by way of `lapply()` and `Map()` (among others), while `Reduce()` diminishes given elements in a consecutive manner until a single result remains. While these functions are relatively straightforward to combine (depending on the functions being passed), R does not inherently possess a singular function to accomplish this operation [unlike Julia with `mapreduce()`](https://docs.julialang.org/en/v0.6.1/stdlib/collections/#Base.mapreduce-NTuple{4,Any}).
+
+The three required parameters are `f`, `o`, and `x` ("fox", collectively). A fourth parameter `y` can be used when `f` imposes additional arguments. The last parameter `...` passes to `Reduce()`.
+
+In turn, `mapreduce()` in `afp` offers a simplified Julia-equivalent with a multivariate option to streamline the intended procedure in R.
+
+### EXAMPLE - `mapreduce()` \#1: Element-wise divide manipulated matrices.
+```{r s3-1}
+matrixl <- list(A = matrix(c(1:9), 3, 3), B = matrix(10:18, 3, 3), C = matrix(19:27, 3, 3))
+output1 <- mapreduce(function(x) x^2 + 1, `/`, matrixl) # == Reduce(`/`, Map(function(x) x^2 + 1, matrixl))
+output1
+
+```
+
+### EXAMPLE - `mapreduce()` \#2: A case of multiple arguments.
+```{r s3-2}
+# Using the same list from the previous example...
+output2 <- with(matrixl, mapreduce(function(i, j, k) i*j - k, `/`, A, list(B, C)))
+output2
+
+```
+
+## 4. `telecast()`
+
+`Map()`/`mapply()` from Base R executes functions pairwise when given multiple data objects, as do `map2()`/`pmap()` from `purrr`. While beneficial in its own right, said functions cannot concisely map over datasets *independently* of each other, which would be useful for storing disparate information into a single list.
+
+Inspired by [`broadcast()` from Julia](https://docs.julialang.org/en/v0.6.1/manual/arrays/#Broadcasting-1), `telecast()` essentially wraps `mapply()` within `lapply()` to achieve this outcome.
+
+The two functions (both required) are `f` and `l`, respectively a function and list. The third parameter `as.vector`, which is optional, converts the output to a vector if set to `TRUE` (and thus will resemble the output from `rapply()`); by default, it is `FALSE` for a list format.
+
+### EXAMPLE - `telecast()` \#1: Apply means to each variable for all datasets in a stored list.
+```{r s4-1}
+l <- list(mc = mtcars, aq = airquality, lcs = LifeCycleSavings)
+
+mean.nr <- function(x) mean(x, na.rm = TRUE) # airquality has NA values.
+output1 <- telecast(mean.nr, l) 
+output1 # Compare: lapply(l, function(x) mapply(mean.nr, x))
+
+```
+
+### EXAMPLE - `telecast()` \#2: Iteratively reduce each variable for all datasets in a list and store in a vector.
+```{r s4-2}
+# With the same list in the previous example...
+
+red.div <- function(y) Reduce(`/`, na.omit(y))
+output2 <- telecast(red.div, l, as.vector = TRUE) 
+output2 # Compare: rapply(l, red.div)
+```
+
+## 5. Conclusion
+
+The functions discussed and demonstrated will be improved on a continuous basis to (1) minimize repetitive iterative processing and (2) emphasize code efficiency and brevity. New functions to be added based on feasibility and future needs as appropriate.
+
+*End of Document*
