@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>12 telecast() | Handbook for the afp (Applied Functional Programming) R Package</title>
+  <title>12 telecast() | Handbook for the afp R Package</title>
   <meta name="description" content="The purpose of the afp–Applied Functional Programming–R package is to provide functionals to simplify iterative processes." />
-  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18.1 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="12 telecast() | Handbook for the afp (Applied Functional Programming) R Package" />
+  <meta property="og:title" content="12 telecast() | Handbook for the afp R Package" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="12 telecast() | Handbook for the afp (Applied Functional Programming) R Package" />
+  <meta name="twitter:title" content="12 telecast() | Handbook for the afp R Package" />
   
   <meta name="twitter:description" content="The purpose of the afp–Applied Functional Programming–R package is to provide functionals to simplify iterative processes." />
   
@@ -24,7 +24,6 @@
 <meta name="author" content="Robert Schnitman" />
 
 
-<meta name="date" content="2020-03-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -221,7 +220,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Handbook for the afp (Applied Functional Programming) R Package</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Handbook for the <code>afp</code> R Package</a>
           </h1>
         </div>
 
@@ -236,18 +235,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The two required functions are <code>f</code> and <code>l</code>, respectively a function and list. The third parameter <code>as.vector</code>, which is optional, converts the output to a vector if set to <code>TRUE</code> (and thus will resemble the output from <code>rapply()</code>); by default, it is <code>FALSE</code> for a list format.</p>
 <div id="iterative-means" class="section level3" number="12.0.1">
 <h3><span class="header-section-number">12.0.1</span> Iterative Means</h3>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="telecast.html#cb61-1"></a><span class="co"># GOAL: Obtain the means for each column in 3 datasets.</span></span>
-<span id="cb61-2"><a href="telecast.html#cb61-2"></a></span>
-<span id="cb61-3"><a href="telecast.html#cb61-3"></a><span class="co">### Create a list of 3 datasets independent of each other.</span></span>
-<span id="cb61-4"><a href="telecast.html#cb61-4"></a>l &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">mc =</span> mtcars, <span class="dt">aq =</span> airquality, <span class="dt">lcs =</span> LifeCycleSavings)</span>
-<span id="cb61-5"><a href="telecast.html#cb61-5"></a></span>
-<span id="cb61-6"><a href="telecast.html#cb61-6"></a><span class="co">### Create a function that removes missing values from calculating the average.</span></span>
-<span id="cb61-7"><a href="telecast.html#cb61-7"></a>mean.nr &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">mean</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="co"># airquality has NA values.</span></span>
-<span id="cb61-8"><a href="telecast.html#cb61-8"></a></span>
-<span id="cb61-9"><a href="telecast.html#cb61-9"></a><span class="co">### Get the means for every column column in each dataset.</span></span>
-<span id="cb61-10"><a href="telecast.html#cb61-10"></a>output1 &lt;-<span class="st"> </span><span class="kw">telecast</span>(mean.nr, l) </span>
-<span id="cb61-11"><a href="telecast.html#cb61-11"></a></span>
-<span id="cb61-12"><a href="telecast.html#cb61-12"></a>output1 <span class="co"># Compare: lapply(l, function(x) mapply(mean.nr, x))</span></span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="telecast.html#cb63-1"></a><span class="co"># GOAL: Obtain the means for each column in 3 datasets.</span></span>
+<span id="cb63-2"><a href="telecast.html#cb63-2"></a></span>
+<span id="cb63-3"><a href="telecast.html#cb63-3"></a><span class="co">### Create a list of 3 datasets independent of each other.</span></span>
+<span id="cb63-4"><a href="telecast.html#cb63-4"></a>l &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">mc =</span> mtcars, <span class="dt">aq =</span> airquality, <span class="dt">lcs =</span> LifeCycleSavings)</span>
+<span id="cb63-5"><a href="telecast.html#cb63-5"></a></span>
+<span id="cb63-6"><a href="telecast.html#cb63-6"></a><span class="co">### Create a function that removes missing values from calculating the average.</span></span>
+<span id="cb63-7"><a href="telecast.html#cb63-7"></a>mean.nr &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">mean</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="co"># airquality has NA values.</span></span>
+<span id="cb63-8"><a href="telecast.html#cb63-8"></a></span>
+<span id="cb63-9"><a href="telecast.html#cb63-9"></a><span class="co">### Get the means for every column column in each dataset.</span></span>
+<span id="cb63-10"><a href="telecast.html#cb63-10"></a>output1 &lt;-<span class="st"> </span><span class="kw">telecast</span>(mean.nr, l) </span>
+<span id="cb63-11"><a href="telecast.html#cb63-11"></a></span>
+<span id="cb63-12"><a href="telecast.html#cb63-12"></a>output1 <span class="co"># Compare: lapply(l, function(x) mapply(mean.nr, x))</span></span></code></pre></div>
 <pre><code>## $mc
 ##        mpg        cyl       disp         hp       drat         wt       qsec 
 ##  20.090625   6.187500 230.721875 146.687500   3.596563   3.217250  17.848750 
@@ -267,11 +266,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The function <code>chain()</code> is a simplification of <code>telecast()</code>: the output is a matrix via <code>sapply()</code>.</p>
 <div id="chaining-means-into-a-bar-plot" class="section level3" number="12.1.1">
 <h3><span class="header-section-number">12.1.1</span> Chaining Means into a Bar Plot</h3>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="telecast.html#cb63-1"></a><span class="co"># GOAL 1: Get means for every column in mtcars by cylinder.</span></span>
-<span id="cb63-2"><a href="telecast.html#cb63-2"></a></span>
-<span id="cb63-3"><a href="telecast.html#cb63-3"></a>l      &lt;-<span class="st"> </span><span class="kw">split</span>(mtcars, mtcars<span class="op">$</span>cyl) </span>
-<span id="cb63-4"><a href="telecast.html#cb63-4"></a>output &lt;-<span class="st"> </span><span class="kw">chain</span>(mean, l)</span>
-<span id="cb63-5"><a href="telecast.html#cb63-5"></a>output</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="telecast.html#cb65-1"></a><span class="co"># GOAL 1: Get means for every column in mtcars by cylinder.</span></span>
+<span id="cb65-2"><a href="telecast.html#cb65-2"></a></span>
+<span id="cb65-3"><a href="telecast.html#cb65-3"></a>l      &lt;-<span class="st"> </span><span class="kw">split</span>(mtcars, mtcars<span class="op">$</span>cyl) </span>
+<span id="cb65-4"><a href="telecast.html#cb65-4"></a>output &lt;-<span class="st"> </span><span class="kw">chain</span>(mean, l)</span>
+<span id="cb65-5"><a href="telecast.html#cb65-5"></a>output</span></code></pre></div>
 <pre><code>##        mpg cyl     disp        hp     drat       wt     qsec        vs
 ## 4 26.66364   4 105.1364  82.63636 4.070909 2.285727 19.13727 0.9090909
 ## 6 19.74286   6 183.3143 122.28571 3.585714 3.117143 17.97714 0.5714286
@@ -280,19 +279,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4 0.7272727 4.090909 1.545455
 ## 6 0.4285714 3.857143 3.428571
 ## 8 0.1428571 3.285714 3.500000</code></pre>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="telecast.html#cb65-1"></a><span class="kw">all</span>(<span class="kw">chain</span>(mean, l) <span class="op">==</span><span class="st"> </span><span class="kw">t</span>(<span class="kw">sapply</span>(l, <span class="cf">function</span>(z) <span class="kw">sapply</span>(z, mean))))</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="telecast.html#cb67-1"></a><span class="kw">all</span>(<span class="kw">chain</span>(mean, l) <span class="op">==</span><span class="st"> </span><span class="kw">t</span>(<span class="kw">sapply</span>(l, <span class="cf">function</span>(z) <span class="kw">sapply</span>(z, mean))))</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="telecast.html#cb67-1"></a><span class="co"># GOAL 2: Plot the means</span></span>
-<span id="cb67-2"><a href="telecast.html#cb67-2"></a><span class="kw">par</span> (<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">3</span>))</span>
-<span id="cb67-3"><a href="telecast.html#cb67-3"></a></span>
-<span id="cb67-4"><a href="telecast.html#cb67-4"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">NCOL</span>(output)) {</span>
-<span id="cb67-5"><a href="telecast.html#cb67-5"></a></span>
-<span id="cb67-6"><a href="telecast.html#cb67-6"></a>  <span class="kw">barplot</span>(output[, i], </span>
-<span id="cb67-7"><a href="telecast.html#cb67-7"></a>          <span class="dt">col  =</span> <span class="st">&#39;cyan3&#39;</span>, </span>
-<span id="cb67-8"><a href="telecast.html#cb67-8"></a>          <span class="dt">xlab =</span> <span class="st">&#39;Number of Cylinders&#39;</span>, </span>
-<span id="cb67-9"><a href="telecast.html#cb67-9"></a>          <span class="dt">ylab =</span> <span class="kw">paste</span>(<span class="st">&#39;Mean&#39;</span>, <span class="kw">colnames</span>(output)[i]))</span>
-<span id="cb67-10"><a href="telecast.html#cb67-10"></a></span>
-<span id="cb67-11"><a href="telecast.html#cb67-11"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="telecast.html#cb69-1"></a><span class="co"># GOAL 2: Plot the means</span></span>
+<span id="cb69-2"><a href="telecast.html#cb69-2"></a><span class="kw">par</span> (<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">3</span>))</span>
+<span id="cb69-3"><a href="telecast.html#cb69-3"></a></span>
+<span id="cb69-4"><a href="telecast.html#cb69-4"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">NCOL</span>(output)) {</span>
+<span id="cb69-5"><a href="telecast.html#cb69-5"></a></span>
+<span id="cb69-6"><a href="telecast.html#cb69-6"></a>  <span class="kw">barplot</span>(output[, i], </span>
+<span id="cb69-7"><a href="telecast.html#cb69-7"></a>          <span class="dt">col  =</span> <span class="st">&#39;cyan3&#39;</span>, </span>
+<span id="cb69-8"><a href="telecast.html#cb69-8"></a>          <span class="dt">xlab =</span> <span class="st">&#39;Number of Cylinders&#39;</span>, </span>
+<span id="cb69-9"><a href="telecast.html#cb69-9"></a>          <span class="dt">ylab =</span> <span class="kw">paste</span>(<span class="st">&#39;Mean&#39;</span>, <span class="kw">colnames</span>(output)[i]))</span>
+<span id="cb69-10"><a href="telecast.html#cb69-10"></a></span>
+<span id="cb69-11"><a href="telecast.html#cb69-11"></a>}</span></code></pre></div>
 <p><img src="afp-Handbook-web_files/figure-html/chain1-1.png" width="672" /></p>
 </div>
 </div>

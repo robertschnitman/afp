@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Handbook for the afp (Applied Functional Programming) R Package</title>
+  <title>Handbook for the afp R Package</title>
   <meta name="description" content="The purpose of the afp–Applied Functional Programming–R package is to provide functionals to simplify iterative processes." />
-  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18.1 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Handbook for the afp (Applied Functional Programming) R Package" />
+  <meta property="og:title" content="Handbook for the afp R Package" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Handbook for the afp (Applied Functional Programming) R Package" />
+  <meta name="twitter:title" content="Handbook for the afp R Package" />
   
   <meta name="twitter:description" content="The purpose of the afp–Applied Functional Programming–R package is to provide functionals to simplify iterative processes." />
   
@@ -24,7 +24,6 @@
 <meta name="author" content="Robert Schnitman" />
 
 
-<meta name="date" content="2020-03-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -221,7 +220,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Handbook for the afp (Applied Functional Programming) R Package</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Handbook for the <code>afp</code> R Package</a>
           </h1>
         </div>
 
@@ -230,13 +229,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="header">
-<h1 class="title">Handbook for the afp (Applied Functional Programming) R Package</h1>
+<h1 class="title">Handbook for the <code>afp</code> R Package</h1>
 <p class="author"><em>Robert Schnitman</em></p>
-<p class="date"><em>March 17, 2020</em></p>
+<p class="date"><em>March 21, 2020 (Last updated: April 04, 2020)</em></p>
 </div>
 <div id="introduction" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Introduction</h1>
-<p>The <code>afp</code> package–<em>Applied Functional Programming</em>–provides functionals to simplify iterative processes in R. The Base R <code>*apply()</code> family, <a href="https://purrr.tidyverse.org/"><code>purrr</code></a><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> library, and <a href="https://julialang.org/">Julia programming language</a><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> are the principal influences. The former two contain tools essential for functional programming that minimize the need to incorporate loops and increase code brevity; however, there is inelegance with respect to specific situations.</p>
+<p>The <code>afp</code>–<em>Applied Functional Programming</em>–packageprovides functionals to simplify iterative processes in R. The Base R <code>*apply()</code> family, <a href="https://purrr.tidyverse.org/"><code>purrr</code></a><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> library, and <a href="https://julialang.org/">Julia programming language</a><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> are the principal influences. The former two contain tools essential for functional programming that minimize the need to incorporate loops and increase code brevity; however, there is inelegance with respect to specific situations.</p>
 <p>For example, to map a function and consequently bind rows or columns, <code>purrr</code> splits the decision into two functions rather than within one: <code>map_dfr()</code> and <code>map_dfc()</code><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>, both of which only output to data frames (the former behaves the same as <code>map_df()</code><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>)–while this feature is as intended, they nonetheless omit the possibility of a matrix when such a data type is preferred. Additionally, to reduce the results of a mapping, one must encase <code>Map()</code>/<code>lapply()</code> in <code>Reduce()</code>, while <a href="https://docs.julialang.org/en/v0.6.1/stdlib/collections/#Base.mapreduce-NTuple%7B4,Any%7D">Julia blends the routine into <code>mapreduce()</code></a><a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>.</p>
 <p>As such, <code>afp</code> exists to supplement the functionals in Base R,
 <code>purrr</code>, and others to support efficient and concise programming.</p>
