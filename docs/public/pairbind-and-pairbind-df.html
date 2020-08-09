@@ -146,17 +146,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="mapchr.html"><a href="mapchr.html"><i class="fa fa-check"></i><b>5</b> <em>mapchr()</em></a>
 <ul>
 <li class="chapter" data-level="5.0.1" data-path="mapchr.html"><a href="mapchr.html#collapsing"><i class="fa fa-check"></i><b>5.0.1</b> Collapsing</a></li>
-<li class="chapter" data-level="5.1" data-path="mapchr.html"><a href="mapchr.html#is.lower-and-is.upper"><i class="fa fa-check"></i><b>5.1</b> <em>is.lower()</em> and <em>is.upper()</em></a>
+<li class="chapter" data-level="5.1" data-path="mapchr.html"><a href="mapchr.html#jumble"><i class="fa fa-check"></i><b>5.1</b> <em>jumble()</em></a>
 <ul>
-<li class="chapter" data-level="5.1.1" data-path="mapchr.html"><a href="mapchr.html#testing-whether-an-element-is-all-uppercase-or-lowercase."><i class="fa fa-check"></i><b>5.1.1</b> Testing whether an element is all uppercase or lowercase.</a></li>
-</ul></li>
-<li class="chapter" data-level="5.2" data-path="mapchr.html"><a href="mapchr.html#jumble"><i class="fa fa-check"></i><b>5.2</b> <em>jumble()</em></a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="mapchr.html"><a href="mapchr.html#jumbling-characters"><i class="fa fa-check"></i><b>5.2.1</b> Jumbling characters</a></li>
-</ul></li>
-<li class="chapter" data-level="5.3" data-path="mapchr.html"><a href="mapchr.html#reverse"><i class="fa fa-check"></i><b>5.3</b> <em>reverse()</em></a>
-<ul>
-<li class="chapter" data-level="5.3.1" data-path="mapchr.html"><a href="mapchr.html#reversing-every-elements-order."><i class="fa fa-check"></i><b>5.3.1</b> Reversing every element’s order.</a></li>
+<li class="chapter" data-level="5.1.1" data-path="mapchr.html"><a href="mapchr.html#jumbling-characters"><i class="fa fa-check"></i><b>5.1.1</b> Jumbling characters</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="mapdims.html"><a href="mapdims.html"><i class="fa fa-check"></i><b>6</b> <em>mapdims()</em></a>
@@ -234,39 +226,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The function <code>pairbind_df()</code> accomplishes the same as <code>pairbind()</code> except that the output is a data frame.</p>
 <div id="creating-a-kable-friendly-frequency-distribution-table" class="section level3" number="10.0.1">
 <h3><span class="header-section-number">10.0.1</span> Creating a kable-friendly Frequency Distribution Table</h3>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="pairbind-and-pairbind-df.html#cb54-1"></a><span class="kw">library</span>(tidyverse) <span class="co"># For Data management </span></span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="pairbind-and-pairbind-df.html#cb48-1"></a><span class="kw">library</span>(tidyverse) <span class="co"># For Data management </span></span></code></pre></div>
 <pre><code>## Warning: package &#39;tidyverse&#39; was built under R version 3.6.2</code></pre>
 <pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 3.6.3</code></pre>
+<pre><code>## Warning: package &#39;tibble&#39; was built under R version 3.6.3</code></pre>
+<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 3.6.3</code></pre>
 <pre><code>## Warning: package &#39;forcats&#39; was built under R version 3.6.3</code></pre>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="pairbind-and-pairbind-df.html#cb58-1"></a><span class="kw">library</span>(magrittr)  <span class="co"># For the update assignment pipe operator %&lt;&gt;%</span></span>
-<span id="cb58-2"><a href="pairbind-and-pairbind-df.html#cb58-2"></a><span class="kw">library</span>(knitr)     <span class="co"># For kable().</span></span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="pairbind-and-pairbind-df.html#cb54-1"></a><span class="kw">library</span>(magrittr)  <span class="co"># For the update assignment pipe operator %&lt;&gt;%</span></span>
+<span id="cb54-2"><a href="pairbind-and-pairbind-df.html#cb54-2"></a><span class="kw">library</span>(knitr)     <span class="co"># For kable().</span></span></code></pre></div>
 <pre><code>## Warning: package &#39;knitr&#39; was built under R version 3.6.3</code></pre>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="pairbind-and-pairbind-df.html#cb60-1"></a><span class="kw">library</span>(kableExtra)<span class="co"># For other kable functions.</span></span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="pairbind-and-pairbind-df.html#cb56-1"></a><span class="kw">library</span>(kableExtra)<span class="co"># For other kable functions.</span></span></code></pre></div>
 <pre><code>## Warning: package &#39;kableExtra&#39; was built under R version 3.6.3</code></pre>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="pairbind-and-pairbind-df.html#cb62-1"></a><span class="co"># Frequencies</span></span>
-<span id="cb62-2"><a href="pairbind-and-pairbind-df.html#cb62-2"></a>freq_df &lt;-<span class="st"> </span><span class="kw">with</span>(diamonds, <span class="kw">table</span>(color, clarity)) <span class="op">%&gt;%</span></span>
-<span id="cb62-3"><a href="pairbind-and-pairbind-df.html#cb62-3"></a><span class="st">  </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span></span>
-<span id="cb62-4"><a href="pairbind-and-pairbind-df.html#cb62-4"></a><span class="st">  </span><span class="kw">spread</span>(<span class="kw">NCOL</span>(.) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="kw">NCOL</span>(.)) <span class="op">%&gt;%</span></span>
-<span id="cb62-5"><a href="pairbind-and-pairbind-df.html#cb62-5"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Total =</span> <span class="kw">apply</span>(.[, <span class="dv">2</span><span class="op">:</span><span class="kw">NCOL</span>(.)], <span class="dv">1</span>, sum))</span>
-<span id="cb62-6"><a href="pairbind-and-pairbind-df.html#cb62-6"></a></span>
-<span id="cb62-7"><a href="pairbind-and-pairbind-df.html#cb62-7"></a><span class="co"># Percentages</span></span>
-<span id="cb62-8"><a href="pairbind-and-pairbind-df.html#cb62-8"></a> prop_df &lt;-<span class="st"> </span>freq_df </span>
-<span id="cb62-9"><a href="pairbind-and-pairbind-df.html#cb62-9"></a> prop_df[, <span class="dv">2</span><span class="op">:</span><span class="kw">NCOL</span>(prop_df)] &lt;-<span class="st"> </span>prop_df[, <span class="dv">2</span><span class="op">:</span><span class="kw">NCOL</span>(prop_df)]<span class="op">/</span>prop_df<span class="op">$</span>Total</span>
-<span id="cb62-10"><a href="pairbind-and-pairbind-df.html#cb62-10"></a> prop_df[, <span class="dv">2</span><span class="op">:</span><span class="kw">NCOL</span>(prop_df)] <span class="op">%&lt;&gt;%</span><span class="st"> </span></span>
-<span id="cb62-11"><a href="pairbind-and-pairbind-df.html#cb62-11"></a><span class="st">   </span><span class="kw">map_df</span>(<span class="op">~</span><span class="st"> </span><span class="kw">paste0</span>(<span class="kw">round</span>(.x<span class="op">*</span><span class="dv">100</span>), <span class="st">&#39;%&#39;</span>))</span>
-<span id="cb62-12"><a href="pairbind-and-pairbind-df.html#cb62-12"></a>  freq_df <span class="op">%&lt;&gt;%</span><span class="st"> </span></span>
-<span id="cb62-13"><a href="pairbind-and-pairbind-df.html#cb62-13"></a><span class="st">  </span><span class="kw">format</span>(., <span class="dt">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="dt">scientific =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span></span>
-<span id="cb62-14"><a href="pairbind-and-pairbind-df.html#cb62-14"></a><span class="st">  </span><span class="kw">map_df</span>(as.character)</span>
-<span id="cb62-15"><a href="pairbind-and-pairbind-df.html#cb62-15"></a></span>
-<span id="cb62-16"><a href="pairbind-and-pairbind-df.html#cb62-16"></a><span class="co"># Output</span></span>
-<span id="cb62-17"><a href="pairbind-and-pairbind-df.html#cb62-17"></a>prop_df <span class="op">%&lt;&gt;%</span><span class="st"> </span><span class="kw">map_df</span>(as.character)</span>
-<span id="cb62-18"><a href="pairbind-and-pairbind-df.html#cb62-18"></a></span>
-<span id="cb62-19"><a href="pairbind-and-pairbind-df.html#cb62-19"></a>pb &lt;-<span class="st"> </span><span class="kw">pairbind_df</span>(freq_df, prop_df)</span>
-<span id="cb62-20"><a href="pairbind-and-pairbind-df.html#cb62-20"></a></span>
-<span id="cb62-21"><a href="pairbind-and-pairbind-df.html#cb62-21"></a>pb <span class="op">%&gt;%</span></span>
-<span id="cb62-22"><a href="pairbind-and-pairbind-df.html#cb62-22"></a><span class="st">  </span><span class="kw">kable</span>(<span class="dt">booktabs =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></span>
-<span id="cb62-23"><a href="pairbind-and-pairbind-df.html#cb62-23"></a><span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">full_width =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></span>
-<span id="cb62-24"><a href="pairbind-and-pairbind-df.html#cb62-24"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&#39;top&#39;</span>, <span class="dt">latex_hline =</span> <span class="st">&#39;major&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="pairbind-and-pairbind-df.html#cb58-1"></a><span class="co"># Frequencies</span></span>
+<span id="cb58-2"><a href="pairbind-and-pairbind-df.html#cb58-2"></a>freq_df &lt;-<span class="st"> </span><span class="kw">with</span>(diamonds, <span class="kw">table</span>(color, clarity)) <span class="op">%&gt;%</span></span>
+<span id="cb58-3"><a href="pairbind-and-pairbind-df.html#cb58-3"></a><span class="st">  </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span></span>
+<span id="cb58-4"><a href="pairbind-and-pairbind-df.html#cb58-4"></a><span class="st">  </span><span class="kw">spread</span>(<span class="kw">NCOL</span>(.) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="kw">NCOL</span>(.)) <span class="op">%&gt;%</span></span>
+<span id="cb58-5"><a href="pairbind-and-pairbind-df.html#cb58-5"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Total =</span> <span class="kw">apply</span>(.[, <span class="dv">2</span><span class="op">:</span><span class="kw">NCOL</span>(.)], <span class="dv">1</span>, sum))</span>
+<span id="cb58-6"><a href="pairbind-and-pairbind-df.html#cb58-6"></a></span>
+<span id="cb58-7"><a href="pairbind-and-pairbind-df.html#cb58-7"></a><span class="co"># Percentages</span></span>
+<span id="cb58-8"><a href="pairbind-and-pairbind-df.html#cb58-8"></a> prop_df &lt;-<span class="st"> </span>freq_df </span>
+<span id="cb58-9"><a href="pairbind-and-pairbind-df.html#cb58-9"></a> prop_df[, <span class="dv">2</span><span class="op">:</span><span class="kw">NCOL</span>(prop_df)] &lt;-<span class="st"> </span>prop_df[, <span class="dv">2</span><span class="op">:</span><span class="kw">NCOL</span>(prop_df)]<span class="op">/</span>prop_df<span class="op">$</span>Total</span>
+<span id="cb58-10"><a href="pairbind-and-pairbind-df.html#cb58-10"></a> prop_df[, <span class="dv">2</span><span class="op">:</span><span class="kw">NCOL</span>(prop_df)] <span class="op">%&lt;&gt;%</span><span class="st"> </span></span>
+<span id="cb58-11"><a href="pairbind-and-pairbind-df.html#cb58-11"></a><span class="st">   </span><span class="kw">map_df</span>(<span class="op">~</span><span class="st"> </span><span class="kw">paste0</span>(<span class="kw">round</span>(.x<span class="op">*</span><span class="dv">100</span>), <span class="st">&#39;%&#39;</span>))</span>
+<span id="cb58-12"><a href="pairbind-and-pairbind-df.html#cb58-12"></a>  freq_df <span class="op">%&lt;&gt;%</span><span class="st"> </span></span>
+<span id="cb58-13"><a href="pairbind-and-pairbind-df.html#cb58-13"></a><span class="st">  </span><span class="kw">format</span>(., <span class="dt">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="dt">scientific =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span></span>
+<span id="cb58-14"><a href="pairbind-and-pairbind-df.html#cb58-14"></a><span class="st">  </span><span class="kw">map_df</span>(as.character)</span>
+<span id="cb58-15"><a href="pairbind-and-pairbind-df.html#cb58-15"></a></span>
+<span id="cb58-16"><a href="pairbind-and-pairbind-df.html#cb58-16"></a><span class="co"># Output</span></span>
+<span id="cb58-17"><a href="pairbind-and-pairbind-df.html#cb58-17"></a>prop_df <span class="op">%&lt;&gt;%</span><span class="st"> </span><span class="kw">map_df</span>(as.character)</span>
+<span id="cb58-18"><a href="pairbind-and-pairbind-df.html#cb58-18"></a></span>
+<span id="cb58-19"><a href="pairbind-and-pairbind-df.html#cb58-19"></a>pb &lt;-<span class="st"> </span><span class="kw">pairbind_df</span>(freq_df, prop_df)</span>
+<span id="cb58-20"><a href="pairbind-and-pairbind-df.html#cb58-20"></a></span>
+<span id="cb58-21"><a href="pairbind-and-pairbind-df.html#cb58-21"></a>pb <span class="op">%&gt;%</span></span>
+<span id="cb58-22"><a href="pairbind-and-pairbind-df.html#cb58-22"></a><span class="st">  </span><span class="kw">kable</span>(<span class="dt">booktabs =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></span>
+<span id="cb58-23"><a href="pairbind-and-pairbind-df.html#cb58-23"></a><span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">full_width =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></span>
+<span id="cb58-24"><a href="pairbind-and-pairbind-df.html#cb58-24"></a><span class="st">  </span><span class="kw">collapse_rows</span>(<span class="dv">1</span>, <span class="dt">valign =</span> <span class="st">&#39;top&#39;</span>, <span class="dt">latex_hline =</span> <span class="st">&#39;major&#39;</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -784,7 +778,7 @@ gitbook.start({
 },
 "download": null,
 "toc": {
-"collapse": "subsection"
+"collapse": "section"
 },
 "search": false
 });

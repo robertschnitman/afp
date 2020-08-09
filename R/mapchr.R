@@ -3,7 +3,6 @@
 #' @description Apply functions that manipulate character/string vectors. Useful for reordering the characters in each vector element, for example.
 #'
 #' @usage mapchr(f, x)
-#' reverse(x)
 #' jumble(x)
 #' is.upper(x)
 #' is.lower(x)
@@ -13,13 +12,12 @@
 #' 
 #' @return Vector.
 #' 
-#' @details `mapchr()` is a general functional for altering character vectors: apply any function to each of its elements. The function `reverse()` reverses the order of characters for each element. `jumble(x)` randomly changes the order of the characters in every element. Similar to `map_chr()` from the `purrr` library with the exception that the former only accepts character vectors as the data input. These functions are useful when manipulating the arrangement of the characters is desired. Finally, `is.upper()` and `is.lower()` test whether each element in a string vector is all uppercase or lowercase.
+#' @details `mapchr()` is a general functional for altering character vectors: apply any function to each of its elements. `jumble(x)` randomly changes the order of the characters in every element. Similar to `map_chr()` from the `purrr` library with the exception that the former only accepts character vectors as the data input. These functions are useful when manipulating the arrangement of the characters is desired. Finally, `is.upper()` and `is.lower()` test whether each element in a string vector is all uppercase or lowercase.
 #' 
 #' @examples
 #' # 1. Manipulating the letter ordering in each vector elemetn.
 #' rn_mc <- rownames(mtcars)
 #' mapchr(function(x) paste0(x, collapse = '|'), rn_mc)
-#' reverse(rn_mc)
 #' jumble(rn_mc)
 #' 
 #' # 2. Testing for uppercase or lowercase.
@@ -27,8 +25,7 @@
 #' is.upper(chr) # TRUE FALSE FALSE
 #' is.lower(chr) # FALSE  TRUE FALSE
 #' 
-#' @seealso \url{https://github.com/robertschnitman/afp}, \code{\link{lapply}}, 
-#' \code{reverse} from Julia: \url{https://docs.julialang.org/en/v1/base/strings/#Base.reverse-Tuple{Union{SubString{String},%20String}}}
+#' @seealso \url{https://github.com/robertschnitman/afp}, \code{\link{lapply}}
 
 #' @rdname mapchr
 split_apply <- function(f, x, apply_type) {
@@ -74,12 +71,5 @@ split_apply <- function(f, x, apply_type) {
 
 mapchr <- function(f, x) split_apply(f, x, apply_type = 'lapply')
 
-#' @rdname reverse
-reverse <- function(x) mapchr(rev, x)
-
 #' @rdname jumble
 jumble <- function(x) mapchr(sample, x)
-
-#' @rdname is.upper
-is.upper <- function(x) split_apply(function(x) all(x %in% LETTERS), x, apply_type = 'mapply')
-is.lower <- function(x) split_apply(function(x) all(x %in% letters), x, apply_type = 'mapply')

@@ -146,17 +146,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="mapchr.html"><a href="mapchr.html"><i class="fa fa-check"></i><b>5</b> <em>mapchr()</em></a>
 <ul>
 <li class="chapter" data-level="5.0.1" data-path="mapchr.html"><a href="mapchr.html#collapsing"><i class="fa fa-check"></i><b>5.0.1</b> Collapsing</a></li>
-<li class="chapter" data-level="5.1" data-path="mapchr.html"><a href="mapchr.html#is.lower-and-is.upper"><i class="fa fa-check"></i><b>5.1</b> <em>is.lower()</em> and <em>is.upper()</em></a>
+<li class="chapter" data-level="5.1" data-path="mapchr.html"><a href="mapchr.html#jumble"><i class="fa fa-check"></i><b>5.1</b> <em>jumble()</em></a>
 <ul>
-<li class="chapter" data-level="5.1.1" data-path="mapchr.html"><a href="mapchr.html#testing-whether-an-element-is-all-uppercase-or-lowercase."><i class="fa fa-check"></i><b>5.1.1</b> Testing whether an element is all uppercase or lowercase.</a></li>
-</ul></li>
-<li class="chapter" data-level="5.2" data-path="mapchr.html"><a href="mapchr.html#jumble"><i class="fa fa-check"></i><b>5.2</b> <em>jumble()</em></a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="mapchr.html"><a href="mapchr.html#jumbling-characters"><i class="fa fa-check"></i><b>5.2.1</b> Jumbling characters</a></li>
-</ul></li>
-<li class="chapter" data-level="5.3" data-path="mapchr.html"><a href="mapchr.html#reverse"><i class="fa fa-check"></i><b>5.3</b> <em>reverse()</em></a>
-<ul>
-<li class="chapter" data-level="5.3.1" data-path="mapchr.html"><a href="mapchr.html#reversing-every-elements-order."><i class="fa fa-check"></i><b>5.3.1</b> Reversing every element’s order.</a></li>
+<li class="chapter" data-level="5.1.1" data-path="mapchr.html"><a href="mapchr.html#jumbling-characters"><i class="fa fa-check"></i><b>5.1.1</b> Jumbling characters</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="mapdims.html"><a href="mapdims.html"><i class="fa fa-check"></i><b>6</b> <em>mapdims()</em></a>
@@ -234,28 +226,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 collectively)–function, (binary) operator, and collection (e.g. matrix). If <code>f</code> is multivariate, the fourth parameter <code>y</code> can take multiple arguments much like <code>MoreArgs</code> in <code>mapply()</code>. The final parameter <code>...</code> passes to <code>Reduce()</code>. The output is typically a matrix, depending on the inputs and functions being passed.</p>
 <div id="map-and-reduce" class="section level3" number="7.0.1">
 <h3><span class="header-section-number">7.0.1</span> Map and Reduce</h3>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="mapreduce.html#cb34-1"></a><span class="co"># GOAL: Map a function to each matrix and then reduce them by a binary operator.</span></span>
-<span id="cb34-2"><a href="mapreduce.html#cb34-2"></a></span>
-<span id="cb34-3"><a href="mapreduce.html#cb34-3"></a>matrixl &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">A =</span> <span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>), <span class="dv">3</span>, <span class="dv">3</span>), </span>
-<span id="cb34-4"><a href="mapreduce.html#cb34-4"></a>                <span class="dt">B =</span> <span class="kw">matrix</span>(<span class="dv">10</span><span class="op">:</span><span class="dv">18</span>, <span class="dv">3</span>, <span class="dv">3</span>), </span>
-<span id="cb34-5"><a href="mapreduce.html#cb34-5"></a>                <span class="dt">C =</span> <span class="kw">matrix</span>(<span class="dv">19</span><span class="op">:</span><span class="dv">27</span>, <span class="dv">3</span>, <span class="dv">3</span>))</span>
-<span id="cb34-6"><a href="mapreduce.html#cb34-6"></a></span>
-<span id="cb34-7"><a href="mapreduce.html#cb34-7"></a><span class="co">## Univariate case</span></span>
-<span id="cb34-8"><a href="mapreduce.html#cb34-8"></a>output1 &lt;-<span class="st"> </span><span class="kw">mapreduce</span>(<span class="cf">function</span>(x) x<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, <span class="st">`</span><span class="dt">/</span><span class="st">`</span>, matrixl) </span>
-<span id="cb34-9"><a href="mapreduce.html#cb34-9"></a></span>
-<span id="cb34-10"><a href="mapreduce.html#cb34-10"></a>output1 <span class="co">## == Reduce(`/`, Map(function(x) x^2 + 1, matrixl))</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="mapreduce.html#cb28-1"></a><span class="co"># GOAL: Map a function to each matrix and then reduce them by a binary operator.</span></span>
+<span id="cb28-2"><a href="mapreduce.html#cb28-2"></a></span>
+<span id="cb28-3"><a href="mapreduce.html#cb28-3"></a>matrixl &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">A =</span> <span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>), <span class="dv">3</span>, <span class="dv">3</span>), </span>
+<span id="cb28-4"><a href="mapreduce.html#cb28-4"></a>                <span class="dt">B =</span> <span class="kw">matrix</span>(<span class="dv">10</span><span class="op">:</span><span class="dv">18</span>, <span class="dv">3</span>, <span class="dv">3</span>), </span>
+<span id="cb28-5"><a href="mapreduce.html#cb28-5"></a>                <span class="dt">C =</span> <span class="kw">matrix</span>(<span class="dv">19</span><span class="op">:</span><span class="dv">27</span>, <span class="dv">3</span>, <span class="dv">3</span>))</span>
+<span id="cb28-6"><a href="mapreduce.html#cb28-6"></a></span>
+<span id="cb28-7"><a href="mapreduce.html#cb28-7"></a><span class="co">## Univariate case</span></span>
+<span id="cb28-8"><a href="mapreduce.html#cb28-8"></a>output1 &lt;-<span class="st"> </span><span class="kw">mapreduce</span>(<span class="cf">function</span>(x) x<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, <span class="st">`</span><span class="dt">/</span><span class="st">`</span>, matrixl) </span>
+<span id="cb28-9"><a href="mapreduce.html#cb28-9"></a></span>
+<span id="cb28-10"><a href="mapreduce.html#cb28-10"></a>output1 <span class="co">## == Reduce(`/`, Map(function(x) x^2 + 1, matrixl))</span></span></code></pre></div>
 <pre><code>##              [,1]         [,2]         [,3]
 ## [1,] 0.0000547016 0.0002061856 0.0003107868
 ## [2,] 0.0001022035 0.0002490183 0.0003310752
 ## [3,] 0.0001560306 0.0002837380 0.0003456270</code></pre>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="mapreduce.html#cb36-1"></a><span class="co">## Multivariate case</span></span>
-<span id="cb36-2"><a href="mapreduce.html#cb36-2"></a>output2 &lt;-<span class="st"> </span><span class="kw">with</span>(matrixl, </span>
-<span id="cb36-3"><a href="mapreduce.html#cb36-3"></a>                <span class="kw">mapreduce</span>(<span class="cf">function</span>(i, j, k) i<span class="op">*</span>j <span class="op">-</span><span class="st"> </span>k, </span>
-<span id="cb36-4"><a href="mapreduce.html#cb36-4"></a>                          <span class="st">`</span><span class="dt">/</span><span class="st">`</span>, </span>
-<span id="cb36-5"><a href="mapreduce.html#cb36-5"></a>                          A, </span>
-<span id="cb36-6"><a href="mapreduce.html#cb36-6"></a>                          <span class="kw">list</span>(B, C)))</span>
-<span id="cb36-7"><a href="mapreduce.html#cb36-7"></a></span>
-<span id="cb36-8"><a href="mapreduce.html#cb36-8"></a>output2</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="mapreduce.html#cb30-1"></a><span class="co">## Multivariate case</span></span>
+<span id="cb30-2"><a href="mapreduce.html#cb30-2"></a>output2 &lt;-<span class="st"> </span><span class="kw">with</span>(matrixl, </span>
+<span id="cb30-3"><a href="mapreduce.html#cb30-3"></a>                <span class="kw">mapreduce</span>(<span class="cf">function</span>(i, j, k) i<span class="op">*</span>j <span class="op">-</span><span class="st"> </span>k, </span>
+<span id="cb30-4"><a href="mapreduce.html#cb30-4"></a>                          <span class="st">`</span><span class="dt">/</span><span class="st">`</span>, </span>
+<span id="cb30-5"><a href="mapreduce.html#cb30-5"></a>                          A, </span>
+<span id="cb30-6"><a href="mapreduce.html#cb30-6"></a>                          <span class="kw">list</span>(B, C)))</span>
+<span id="cb30-7"><a href="mapreduce.html#cb30-7"></a></span>
+<span id="cb30-8"><a href="mapreduce.html#cb30-8"></a>output2</span></code></pre></div>
 <pre><code>##               [,1]          [,2]          [,3]
 ## [1,] -1.387799e-10 -3.408547e-12 -3.442132e-13
 ## [2,] -2.925642e-11 -1.456427e-12 -1.839155e-13
@@ -267,7 +259,7 @@ collectively)–function, (binary) operator, and collection (e.g. matrix). If <
 <p>The four required parameters are <code>f</code>, <code>o</code>, <code>x</code>, and <code>m</code>–function, (binary) operator, collection (e.g. matrix), and margin (either 1 for row-wise or 2 for column-wise). The fifth, optional parameter <code>...</code> passes to <code>mapreduce()</code>, which passes to <code>Reduce()</code>. The output is typically a matrix, depending on the inputs and functions being passed.</p>
 <div id="map-and-reduce-columnrow-wise" class="section level3" number="7.1.1">
 <h3><span class="header-section-number">7.1.1</span> Map and Reduce Column/Row-wise</h3>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="mapreduce.html#cb38-1"></a><span class="kw">mrchop</span>(<span class="cf">function</span>(x) x<span class="op">/</span><span class="dv">2</span>, <span class="st">`</span><span class="dt">+</span><span class="st">`</span>, mtcars, <span class="dv">1</span>) <span class="co"># Row-wise</span></span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="mapreduce.html#cb32-1"></a><span class="kw">mrchop</span>(<span class="cf">function</span>(x) x<span class="op">/</span><span class="dv">2</span>, <span class="st">`</span><span class="dt">+</span><span class="st">`</span>, mtcars, <span class="dv">1</span>) <span class="co"># Row-wise</span></span></code></pre></div>
 <pre><code>##           Mazda RX4       Mazda RX4 Wag          Datsun 710      Hornet 4 Drive 
 ##            164.4900            164.8975            129.7900            213.0675 
 ##   Hornet Sportabout             Valiant          Duster 360           Merc 240D 
@@ -284,7 +276,7 @@ collectively)–function, (binary) operator, and collection (e.g. matrix). If <
 ##            315.5875            104.1075            136.2850            136.8415 
 ##      Ford Pantera L        Ferrari Dino       Maserati Bora          Volvo 142E 
 ##            335.3450            189.7950            347.3550            144.4450</code></pre>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="mapreduce.html#cb40-1"></a><span class="kw">mrchop</span>(<span class="cf">function</span>(x) x<span class="op">/</span><span class="dv">2</span>, <span class="st">`</span><span class="dt">+</span><span class="st">`</span>, mtcars, <span class="dv">2</span>) <span class="co"># Column-wise</span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="mapreduce.html#cb34-1"></a><span class="kw">mrchop</span>(<span class="cf">function</span>(x) x<span class="op">/</span><span class="dv">2</span>, <span class="st">`</span><span class="dt">+</span><span class="st">`</span>, mtcars, <span class="dv">2</span>) <span class="co"># Column-wise</span></span></code></pre></div>
 <pre><code>##      mpg      cyl     disp       hp     drat       wt     qsec       vs 
 ##  321.450   99.000 3691.550 2347.000   57.545   51.476  285.580    7.000 
 ##       am     gear     carb 
@@ -296,7 +288,7 @@ collectively)–function, (binary) operator, and collection (e.g. matrix). If <
 <p>The function <code>reducechop()</code> has similar properties to <code>mrchop()</code>: it applies <code>Reduce()</code> row-wise or column-wise, which can be specified.</p>
 <div id="reduce-columnrow-wise" class="section level3" number="7.2.1">
 <h3><span class="header-section-number">7.2.1</span> Reduce Column/Row-wise</h3>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="mapreduce.html#cb42-1"></a><span class="kw">reducechop</span>(<span class="st">`</span><span class="dt">+</span><span class="st">`</span>, mtcars, <span class="dv">1</span>) <span class="co"># Row-wise. Equivalent to Reduce(`+`, mtcars). </span></span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="mapreduce.html#cb36-1"></a><span class="kw">reducechop</span>(<span class="st">`</span><span class="dt">+</span><span class="st">`</span>, mtcars, <span class="dv">1</span>) <span class="co"># Row-wise. Equivalent to Reduce(`+`, mtcars). </span></span></code></pre></div>
 <pre><code>##           Mazda RX4       Mazda RX4 Wag          Datsun 710      Hornet 4 Drive 
 ##             328.980             329.795             259.580             426.135 
 ##   Hornet Sportabout             Valiant          Duster 360           Merc 240D 
@@ -313,7 +305,7 @@ collectively)–function, (binary) operator, and collection (e.g. matrix). If <
 ##             631.175             208.215             272.570             273.683 
 ##      Ford Pantera L        Ferrari Dino       Maserati Bora          Volvo 142E 
 ##             670.690             379.590             694.710             288.890</code></pre>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="mapreduce.html#cb44-1"></a><span class="kw">reducechop</span>(<span class="st">`</span><span class="dt">+</span><span class="st">`</span>, mtcars, <span class="dv">2</span>) <span class="co"># Column-wise (default).</span></span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="mapreduce.html#cb38-1"></a><span class="kw">reducechop</span>(<span class="st">`</span><span class="dt">+</span><span class="st">`</span>, mtcars, <span class="dv">2</span>) <span class="co"># Column-wise (default).</span></span></code></pre></div>
 <pre><code>##      mpg      cyl     disp       hp     drat       wt     qsec       vs 
 ##  642.900  198.000 7383.100 4694.000  115.090  102.952  571.160   14.000 
 ##       am     gear     carb 
@@ -377,7 +369,7 @@ gitbook.start({
 },
 "download": null,
 "toc": {
-"collapse": "subsection"
+"collapse": "section"
 },
 "search": false
 });

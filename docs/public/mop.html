@@ -146,17 +146,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="mapchr.html"><a href="mapchr.html"><i class="fa fa-check"></i><b>5</b> <em>mapchr()</em></a>
 <ul>
 <li class="chapter" data-level="5.0.1" data-path="mapchr.html"><a href="mapchr.html#collapsing"><i class="fa fa-check"></i><b>5.0.1</b> Collapsing</a></li>
-<li class="chapter" data-level="5.1" data-path="mapchr.html"><a href="mapchr.html#is.lower-and-is.upper"><i class="fa fa-check"></i><b>5.1</b> <em>is.lower()</em> and <em>is.upper()</em></a>
+<li class="chapter" data-level="5.1" data-path="mapchr.html"><a href="mapchr.html#jumble"><i class="fa fa-check"></i><b>5.1</b> <em>jumble()</em></a>
 <ul>
-<li class="chapter" data-level="5.1.1" data-path="mapchr.html"><a href="mapchr.html#testing-whether-an-element-is-all-uppercase-or-lowercase."><i class="fa fa-check"></i><b>5.1.1</b> Testing whether an element is all uppercase or lowercase.</a></li>
-</ul></li>
-<li class="chapter" data-level="5.2" data-path="mapchr.html"><a href="mapchr.html#jumble"><i class="fa fa-check"></i><b>5.2</b> <em>jumble()</em></a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="mapchr.html"><a href="mapchr.html#jumbling-characters"><i class="fa fa-check"></i><b>5.2.1</b> Jumbling characters</a></li>
-</ul></li>
-<li class="chapter" data-level="5.3" data-path="mapchr.html"><a href="mapchr.html#reverse"><i class="fa fa-check"></i><b>5.3</b> <em>reverse()</em></a>
-<ul>
-<li class="chapter" data-level="5.3.1" data-path="mapchr.html"><a href="mapchr.html#reversing-every-elements-order."><i class="fa fa-check"></i><b>5.3.1</b> Reversing every element’s order.</a></li>
+<li class="chapter" data-level="5.1.1" data-path="mapchr.html"><a href="mapchr.html#jumbling-characters"><i class="fa fa-check"></i><b>5.1.1</b> Jumbling characters</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="mapdims.html"><a href="mapdims.html"><i class="fa fa-check"></i><b>6</b> <em>mapdims()</em></a>
@@ -233,7 +225,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The four required arguments are <code>x</code>, <code>m</code>, <code>s</code>, and <code>f</code>–the collection (e.g. matrix), margin (1 for row-wise or 2 for column-wise), summary statistic function, and binary opertaor function, respectively. A fifth, optional argument <code>...</code> passes to <code>sweep()</code>. The output is typically a matrix or dataframe, depending on the inputs and functions being passed.</p>
 <div id="mopping-a-dataframe" class="section level3" number="8.0.1">
 <h3><span class="header-section-number">8.0.1</span> Mopping a Dataframe</h3>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="mop.html#cb46-1"></a><span class="kw">head</span>(<span class="kw">mop</span>(mtcars, <span class="dv">2</span>, mean, <span class="st">`</span><span class="dt">/</span><span class="st">`</span>)) <span class="co"># == head(sweep(mtcars, 2, apply(mtcars, 2, mean), `/`))</span></span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="mop.html#cb40-1"></a><span class="kw">head</span>(<span class="kw">mop</span>(mtcars, <span class="dv">2</span>, mean, <span class="st">`</span><span class="dt">/</span><span class="st">`</span>)) <span class="co"># == head(sweep(mtcars, 2, apply(mtcars, 2, mean), `/`))</span></span></code></pre></div>
 <pre><code>##                         mpg       cyl      disp        hp      drat        wt
 ## Mazda RX4         1.0452636 0.9696970 0.6934756 0.7498935 1.0843688 0.8143601
 ## Mazda RX4 Wag     1.0452636 0.9696970 0.6934756 0.7498935 1.0843688 0.8936203
@@ -255,7 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Only two parameters are reuqired: the collection <code>x</code> and summary statistic function <code>s</code>. The output is similar to that of <code>mop()</code>.</p>
 <div id="indexing-a-dataframe" class="section level3" number="8.1.1">
 <h3><span class="header-section-number">8.1.1</span> Indexing a Dataframe</h3>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="mop.html#cb48-1"></a><span class="kw">head</span>(<span class="kw">mop_div</span>(mtcars, mean))</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="mop.html#cb42-1"></a><span class="kw">head</span>(<span class="kw">mop_div</span>(mtcars, mean))</span></code></pre></div>
 <pre><code>##                         mpg       cyl      disp        hp      drat        wt
 ## Mazda RX4         1.0452636 0.9696970 0.6934756 0.7498935 1.0843688 0.8143601
 ## Mazda RX4 Wag     1.0452636 0.9696970 0.6934756 0.7498935 1.0843688 0.8936203
@@ -278,7 +270,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The three required inputs are the collection <code>x</code>, summary statistic function <code>s</code>, and binary operator function <code>f</code>. A fourth, optional input <code>...</code> passes to <code>mop()</code>, which passes to <code>sweep()</code>.</p>
 <div id="indexing-a-dataframe-part-2" class="section level3" number="8.2.1">
 <h3><span class="header-section-number">8.2.1</span> Indexing a Dataframe, Part 2</h3>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="mop.html#cb50-1"></a><span class="kw">head</span>(<span class="kw">smop</span>(mtcars, mean, <span class="st">`</span><span class="dt">/</span><span class="st">`</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="mop.html#cb44-1"></a><span class="kw">head</span>(<span class="kw">smop</span>(mtcars, mean, <span class="st">`</span><span class="dt">/</span><span class="st">`</span>))</span></code></pre></div>
 <pre><code>##                         mpg       cyl      disp        hp      drat        wt
 ## Mazda RX4         1.0452636 0.9696970 0.6934756 0.7498935 1.0843688 0.8143601
 ## Mazda RX4 Wag     1.0452636 0.9696970 0.6934756 0.7498935 1.0843688 0.8936203
@@ -346,7 +338,7 @@ gitbook.start({
 },
 "download": null,
 "toc": {
-"collapse": "subsection"
+"collapse": "section"
 },
 "search": false
 });

@@ -4,7 +4,16 @@ title:  Handbook for the `afp` R Package
 author: "Robert Schnitman"
 date: "`r paste0('March 21, 2020 (Last updated: ', format(Sys.Date(), '%B %d, %Y'), ')')`"
 site: bookdown::bookdown_site
-output: bookdown::gitbook
+output: 
+  bookdown::gitbook: 
+    config:
+      toc:
+        collapse: section
+      search: yes
+      fontsettings:
+        theme: white
+      download: ["PDF"]
+  bookdown::pdf_book: default
 biblio-style: apalike
 link-citations: yes
 description: "The purpose of the afp--Applied Functional Programming--R package is to provide functionals to simplify iterative processes."
@@ -147,17 +156,6 @@ rn_mc <- rownames(mtcars)
 mapchr(function(x) paste0(x, collapse = '|'), rn_mc)
 ```
 
-## *is.lower()* and *is.upper()*
-
-The functions `is.upper()` and `is.lower()` test whether each element in a string vector is all uppercase or lowercase, respectively. The required input for both functions is a character vector. The output is a Boolean vector. These functions are useful for pattern matching acronyms, uppercase, and lowercase elements.
-
-### Testing whether an element is all uppercase or lowercase.
-```{r islu1}
-chr <- c('TEST', 'test', 'tEsT')
-is.upper(chr)
-is.lower(chr)
-```
-
 ## *jumble()*
 
 The function `jumble(x)` randomly changes the order of the characters in every element. The input and output is a character vector. This function can be useful for generating variations of existing passwords or other types of string vectors.
@@ -167,16 +165,6 @@ The function `jumble(x)` randomly changes the order of the characters in every e
 set.seed(0)
 rn_mc <- rownames(mtcars)
 jumble(rn_mc)
-```
-
-## *reverse()*
-
-The function `reverse()` reverses the order of characters for each element. The input and output is a character vector. This function can be useful for decoding reversed strings.
-
-### Reversing every element's order.
-```{r reverse1}
-rn_mc <- rownames(mtcars)
-reverse(rn_mc)
 ```
 
 # *mapdims()*

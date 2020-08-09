@@ -22,6 +22,9 @@ List for \code{telecast}, matrix for \code{chain}.
 \description{
 Apply common function over multiple objects independent of each other.
 }
+\details{
+
+}
 \examples{
 l <- list(mc = mtcars, aq = airquality, lcs = LifeCycleSavings) # Store to reference easily for the two examples below.
 

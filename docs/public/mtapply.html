@@ -146,17 +146,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="mapchr.html"><a href="mapchr.html"><i class="fa fa-check"></i><b>5</b> <em>mapchr()</em></a>
 <ul>
 <li class="chapter" data-level="5.0.1" data-path="mapchr.html"><a href="mapchr.html#collapsing"><i class="fa fa-check"></i><b>5.0.1</b> Collapsing</a></li>
-<li class="chapter" data-level="5.1" data-path="mapchr.html"><a href="mapchr.html#is.lower-and-is.upper"><i class="fa fa-check"></i><b>5.1</b> <em>is.lower()</em> and <em>is.upper()</em></a>
+<li class="chapter" data-level="5.1" data-path="mapchr.html"><a href="mapchr.html#jumble"><i class="fa fa-check"></i><b>5.1</b> <em>jumble()</em></a>
 <ul>
-<li class="chapter" data-level="5.1.1" data-path="mapchr.html"><a href="mapchr.html#testing-whether-an-element-is-all-uppercase-or-lowercase."><i class="fa fa-check"></i><b>5.1.1</b> Testing whether an element is all uppercase or lowercase.</a></li>
-</ul></li>
-<li class="chapter" data-level="5.2" data-path="mapchr.html"><a href="mapchr.html#jumble"><i class="fa fa-check"></i><b>5.2</b> <em>jumble()</em></a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="mapchr.html"><a href="mapchr.html#jumbling-characters"><i class="fa fa-check"></i><b>5.2.1</b> Jumbling characters</a></li>
-</ul></li>
-<li class="chapter" data-level="5.3" data-path="mapchr.html"><a href="mapchr.html#reverse"><i class="fa fa-check"></i><b>5.3</b> <em>reverse()</em></a>
-<ul>
-<li class="chapter" data-level="5.3.1" data-path="mapchr.html"><a href="mapchr.html#reversing-every-elements-order."><i class="fa fa-check"></i><b>5.3.1</b> Reversing every element’s order.</a></li>
+<li class="chapter" data-level="5.1.1" data-path="mapchr.html"><a href="mapchr.html#jumbling-characters"><i class="fa fa-check"></i><b>5.1.1</b> Jumbling characters</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="mapdims.html"><a href="mapdims.html"><i class="fa fa-check"></i><b>6</b> <em>mapdims()</em></a>
@@ -233,10 +225,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The two required inputs are the object <code>X</code> and list of indices <code>INDEX</code>. The optional inputs are the function to apply <code>FUN</code> and <code>...</code>, which passses to <code>mapply</code>. For the first three inputs, see the documentation for <code>tapply()</code><a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a> for more information; for the fourth, see <code>mapply()</code><a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a>. The output is typically a list of vectors or matrices, depending on the inputs and funciton being passed.</p>
 <div id="multivariate-tapply" class="section level3" number="9.0.1">
 <h3><span class="header-section-number">9.0.1</span> Multivariate <code>tapply()</code></h3>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="mtapply.html#cb52-1"></a>A &lt;-<span class="st"> </span>mtcars[, <span class="kw">c</span>(<span class="st">&#39;mpg&#39;</span>, <span class="st">&#39;wt&#39;</span>, <span class="st">&#39;disp&#39;</span>)]  <span class="co"># Targets.</span></span>
-<span id="cb52-2"><a href="mtapply.html#cb52-2"></a>B &lt;-<span class="st"> </span>mtcars[, <span class="kw">c</span>(<span class="st">&#39;gear&#39;</span>, <span class="st">&#39;am&#39;</span>, <span class="st">&#39;carb&#39;</span>)] <span class="co"># Indices.</span></span>
-<span id="cb52-3"><a href="mtapply.html#cb52-3"></a></span>
-<span id="cb52-4"><a href="mtapply.html#cb52-4"></a><span class="kw">mtapply</span>(A, B, mean) <span class="co"># Output</span></span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="mtapply.html#cb46-1"></a>A &lt;-<span class="st"> </span>mtcars[, <span class="kw">c</span>(<span class="st">&#39;mpg&#39;</span>, <span class="st">&#39;wt&#39;</span>, <span class="st">&#39;disp&#39;</span>)]  <span class="co"># Targets.</span></span>
+<span id="cb46-2"><a href="mtapply.html#cb46-2"></a>B &lt;-<span class="st"> </span>mtcars[, <span class="kw">c</span>(<span class="st">&#39;gear&#39;</span>, <span class="st">&#39;am&#39;</span>, <span class="st">&#39;carb&#39;</span>)] <span class="co"># Indices.</span></span>
+<span id="cb46-3"><a href="mtapply.html#cb46-3"></a></span>
+<span id="cb46-4"><a href="mtapply.html#cb46-4"></a><span class="kw">mtapply</span>(A, B, mean) <span class="co"># Output</span></span></code></pre></div>
 <pre><code>## $mpg_by_gear
 ##        3        4        5 
 ## 16.10667 24.53333 21.38000 
@@ -307,7 +299,7 @@ gitbook.start({
 },
 "download": null,
 "toc": {
-"collapse": "subsection"
+"collapse": "section"
 },
 "search": false
 });

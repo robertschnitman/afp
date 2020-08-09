@@ -146,17 +146,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="mapchr.html"><a href="mapchr.html"><i class="fa fa-check"></i><b>5</b> <em>mapchr()</em></a>
 <ul>
 <li class="chapter" data-level="5.0.1" data-path="mapchr.html"><a href="mapchr.html#collapsing"><i class="fa fa-check"></i><b>5.0.1</b> Collapsing</a></li>
-<li class="chapter" data-level="5.1" data-path="mapchr.html"><a href="mapchr.html#is.lower-and-is.upper"><i class="fa fa-check"></i><b>5.1</b> <em>is.lower()</em> and <em>is.upper()</em></a>
+<li class="chapter" data-level="5.1" data-path="mapchr.html"><a href="mapchr.html#jumble"><i class="fa fa-check"></i><b>5.1</b> <em>jumble()</em></a>
 <ul>
-<li class="chapter" data-level="5.1.1" data-path="mapchr.html"><a href="mapchr.html#testing-whether-an-element-is-all-uppercase-or-lowercase."><i class="fa fa-check"></i><b>5.1.1</b> Testing whether an element is all uppercase or lowercase.</a></li>
-</ul></li>
-<li class="chapter" data-level="5.2" data-path="mapchr.html"><a href="mapchr.html#jumble"><i class="fa fa-check"></i><b>5.2</b> <em>jumble()</em></a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="mapchr.html"><a href="mapchr.html#jumbling-characters"><i class="fa fa-check"></i><b>5.2.1</b> Jumbling characters</a></li>
-</ul></li>
-<li class="chapter" data-level="5.3" data-path="mapchr.html"><a href="mapchr.html#reverse"><i class="fa fa-check"></i><b>5.3</b> <em>reverse()</em></a>
-<ul>
-<li class="chapter" data-level="5.3.1" data-path="mapchr.html"><a href="mapchr.html#reversing-every-elements-order."><i class="fa fa-check"></i><b>5.3.1</b> Reversing every element’s order.</a></li>
+<li class="chapter" data-level="5.1.1" data-path="mapchr.html"><a href="mapchr.html#jumbling-characters"><i class="fa fa-check"></i><b>5.1.1</b> Jumbling characters</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="mapdims.html"><a href="mapdims.html"><i class="fa fa-check"></i><b>6</b> <em>mapdims()</em></a>
@@ -233,7 +225,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The required inputs for these functions are <code>f</code> and <code>x</code>, respectively the function to execute and the dataset over which to perform the function. The output is a list of arrays (typically a vector or matrix, depending on the function being passed).</p>
 <div id="mapping-dimensions" class="section level3" number="6.0.1">
 <h3><span class="header-section-number">6.0.1</span> Mapping dimensions</h3>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="mapdims.html#cb28-1"></a><span class="kw">mapdims</span>(median, mtcars)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="mapdims.html#cb22-1"></a><span class="kw">mapdims</span>(median, mtcars)</span></code></pre></div>
 <pre><code>## $rowwise
 ##           Mazda RX4       Mazda RX4 Wag          Datsun 710      Hornet 4 Drive 
 ##               4.000               4.000               4.000               3.215 
@@ -264,12 +256,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The required inputs for these functions are <code>f</code> and <code>x</code>, respectively the function to execute and the dataset over which to perform the function. The output is an array (typically a vector or matrix, depending on the function being passed).</p>
 <div id="mapcr" class="section level3" number="6.1.1">
 <h3><span class="header-section-number">6.1.1</span> <code>mapc/r()</code></h3>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="mapdims.html#cb30-1"></a><span class="kw">mapc</span>(median, mtcars) <span class="co"># Column-wise results</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="mapdims.html#cb24-1"></a><span class="kw">mapc</span>(median, mtcars) <span class="co"># Column-wise results</span></span></code></pre></div>
 <pre><code>##     mpg     cyl    disp      hp    drat      wt    qsec      vs      am    gear 
 ##  19.200   6.000 196.300 123.000   3.695   3.325  17.710   0.000   0.000   4.000 
 ##    carb 
 ##   2.000</code></pre>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="mapdims.html#cb32-1"></a><span class="kw">mapr</span>(median, mtcars) <span class="co"># Row-wise results.</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="mapdims.html#cb26-1"></a><span class="kw">mapr</span>(median, mtcars) <span class="co"># Row-wise results.</span></span></code></pre></div>
 <pre><code>##           Mazda RX4       Mazda RX4 Wag          Datsun 710      Hornet 4 Drive 
 ##               4.000               4.000               4.000               3.215 
 ##   Hornet Sportabout             Valiant          Duster 360           Merc 240D 
@@ -339,7 +331,7 @@ gitbook.start({
 },
 "download": null,
 "toc": {
-"collapse": "subsection"
+"collapse": "section"
 },
 "search": false
 });
